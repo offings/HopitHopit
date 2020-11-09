@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_search">
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.hopithopit.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_hospinfo"
+        android:name="com.example.hopithopit.ui.hospinfo.HospinfoFragment"
+        android:label="@string/title_hospinfo"
+        tools:layout="@layout/fragment_hospinfo" />
+
+    <fragment
+        android:id="@+id/navigation_acceptable"
+        android:name="com.example.hopithopit.ui.acceptable.AcceptableFragment"
+        android:label="@string/title_acceptable"
+        tools:layout="@layout/fragment_acceptable" />
+
+    <fragment
+        android:id="@+id/navigation_assesment"
+        android:name="com.example.hopithopit.ui.assessment.AssessmentFragment"
+        android:label="@string/title_assessment"
+        tools:layout="@layout/fragment_assessment" />
+
+    <fragment
+        android:id="@+id/navigation_ambulance"
+        android:name="com.example.hopithopit.ui.ambulance.AmbulanceFragment"
+        android:label="@string/title_ambulance"
+        tools:layout="@layout/fragment_ambulance" />
+</navigation>
