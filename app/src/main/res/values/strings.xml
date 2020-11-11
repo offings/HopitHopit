@@ -5,4 +5,6 @@
     <string name="title_acceptable">실시간</string>
     <string name="title_assessment">평가정보</string>
     <string name="title_ambulance">민간구급차</string>
+    <string name="title_activity_accept1">MainActivity</string>
+
 </resources>
