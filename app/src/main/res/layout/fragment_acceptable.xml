@@ -12,151 +12,145 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/search_region"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:text="지역 조건" />
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="150dp"
+                android:layout_height="46dp" />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="150dp"
+                android:layout_height="46dp" />
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/search_region"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:text="지역 조건" />
-
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="150dp"
-            android:layout_height="46dp" />
-
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="150dp"
-            android:layout_height="46dp" />
-
-        <Button
-            android:id="@+id/search_key"
+            android:id="@+id/bed_inq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="검색" />
+            android:text="실시간 병상 조회" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <CheckBox
+                android:id="@+id/er"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="응급실"/>
 
-    <TextView
-        android:id="@+id/bed_inq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="실시간 병상 조회" />
+            <CheckBox
+                android:id="@+id/ward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="입원실" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/text_room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
 
-        <CheckBox
-            android:id="@+id/er"
+        <TextView
+            android:id="@+id/em_dis_inf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="응급실" />
+            android:text="중증 응급 질환 정보" />
 
-        <CheckBox
-            android:id="@+id/ward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="입원실" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/ce_he"
+                android:text="뇌출혈 수술"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <CheckBox
+                android:id="@+id/ce_in"
+                android:text="뇌경색"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <CheckBox
+                android:id="@+id/mi"
+                android:text="심근경색"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <CheckBox
+                android:id="@+id/ab_in"
+                android:text="복부손상"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_room"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/em_dis_inf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="중증 응급 질환 정보" />
+            <CheckBox
+                android:id="@+id/massive_bu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="중증화상" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <CheckBox
-            android:id="@+id/ce_he"
-            android:text="뇌출혈 수술"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <CheckBox
-            android:id="@+id/ce_in"
-            android:text="뇌경색"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <CheckBox
-            android:id="@+id/mi"
-            android:text="심근경색"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <CheckBox
-            android:id="@+id/ab_in"
-            android:text="복부손상"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            <CheckBox
+                android:id="@+id/connect_li"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사지접합" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/em_en"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="응급내시경" />
 
-        <CheckBox
-            android:id="@+id/massive_bu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="중증화상" />
+            <CheckBox
+                android:id="@+id/em_di"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="응급투석" />
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/connect_li"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="사지접합" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/em_en"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="응급내시경" />
+            <CheckBox
+                android:id="@+id/pre_mom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="조산 산모" />
 
-        <CheckBox
-            android:id="@+id/em_di"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="응급투석" />
-    </LinearLayout>
+            <CheckBox
+                android:id="@+id/mental_pat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="정신질환자" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/baby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="신생아" />
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/pre_mom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="조산 산모" />
-
-        <CheckBox
-            android:id="@+id/mental_pat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="정신질환자" />
-
-        <CheckBox
-            android:id="@+id/baby"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="신생아" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/text_dis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/text_dis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 </LinearLayout>
