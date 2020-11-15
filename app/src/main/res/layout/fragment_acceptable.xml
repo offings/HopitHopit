@@ -57,9 +57,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="입원실" />
+
         </LinearLayout>
 
-        <TextView
+
+    <Button
+        android:id="@+id/room_button"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:text="잔여 병상 조회" />
+
+    <TextView
             android:id="@+id/text_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,6 +156,11 @@
                 android:text="신생아" />
         </LinearLayout>
 
+    <Button
+        android:id="@+id/dis_button"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:text="수용 가능 여부 조회" />
         <TextView
             android:id="@+id/text_dis"
             android:layout_width="match_parent"
