@@ -1,8 +1,10 @@
 package com.example.hopithopit.ui.acceptable;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +130,6 @@ public class AcceptableFragment extends Fragment {
         er_check=(CheckBox)root.findViewById(R.id.er);
         ward_check=(CheckBox)root.findViewById(R.id.ward);
         room_button=(Button) root.findViewById(R.id.room_button);
-
         room_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,7 +140,6 @@ public class AcceptableFragment extends Fragment {
                         task.execute(room_dal_api);
                     }
                     else if(select_dg.equals("북구")){
-                        txt_room.setText("북구선택");
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_buk_api);
                     }
@@ -203,6 +203,8 @@ public class AcceptableFragment extends Fragment {
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(room_gun_api);
                     }
+                } else if(!er_check.isChecked()&& !ward_check.isChecked()){
+                    txt_room.setText(" ");
                 }
             }
         });
@@ -599,6 +601,8 @@ public class AcceptableFragment extends Fragment {
                         DownloadWebpageTask13 task= new DownloadWebpageTask13();
                         task.execute(dis_gun_api);
                     }
+                }else if(!ce_he_check.isChecked()&& !ce_in_check.isChecked() &&!mi_check.isChecked()&&!ab_in_check.isChecked()&&!massive_bu_check.isChecked()&&!connect_li_check.isChecked()&&!em_en_check.isChecked()&&!em_di_check.isChecked()&&!pre_mom_check.isChecked()&&!mental_pat_check.isChecked()&&!baby_check.isChecked()){
+                    txt_dis.setText(" ");
                 }
             }
         });
@@ -663,7 +667,7 @@ public class AcceptableFragment extends Fragment {
                     eventType=xpp.next();
                 }
             }catch (Exception e){
-                txt_room.setText("에러ㅜ");
+                txt_room.setText("error");
             }
         }
         private String downloadUrl(String api)throws IOException{
@@ -703,7 +707,7 @@ public class AcceptableFragment extends Fragment {
             boolean indutyName=false, inhvec=false, inhvgc=false, initem=false;
             String dutyName=null; String hvec=null; String hvgc=null;
             super.onPostExecute(result);
-            txt_room.setText(" ");
+            txt_room.setText("");
             try {// XML Pull Parser 객체생성
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -746,7 +750,7 @@ public class AcceptableFragment extends Fragment {
                     eventType=xpp.next();
                 }
             }catch (Exception e){
-                txt_room.setText("에러ㅜ");
+                txt_room.setText("error");
             }
         }
         private String downloadUrl(String api)throws IOException{
