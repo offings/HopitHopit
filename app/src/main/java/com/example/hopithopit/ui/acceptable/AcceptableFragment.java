@@ -46,12 +46,15 @@ public class AcceptableFragment extends Fragment {
     private String select_dg;
     private String select_gb;
     //병상 출력, 중증 응급 질환 정보 출력
-    TextView txt_room;
-    TextView txt_dis;
+    TextView txt_er, txt_ward;
+    TextView txt_ce_he, txt_ce_in, txt_mi, txt_ab_in, txt_massive_bu, txt_connect_li;
+    TextView txt_em_en, txt_em_di, txt_pre_mom, txt_mental_pat, txt_baby;
+    TextView hop_name;
     CheckBox er_check, ward_check;
     CheckBox ce_he_check, ce_in_check, mi_check, ab_in_check, massive_bu_check, connect_li_check, em_en_check, em_di_check, pre_mom_check, mental_pat_check, baby_check;
     Button room_button, dis_button;
 
+    //대구 응급실 api
     String room_dal_api = "http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EB%8B%AC%EC%84%9C%EA%B5%AC&pageNo=1&numOfRows=10";
     String room_buk_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EB%B6%81%EA%B5%AC&pageNo=1&numOfRows=10";
     String room_dong_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EB%8F%99%EA%B5%AC&pageNo=1&numOfRows=10";
@@ -61,6 +64,7 @@ public class AcceptableFragment extends Fragment {
     String room_jung_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EC%A4%91%EA%B5%AC&pageNo=1&numOfRows=10";
     String room_gun_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EB%8B%AC%EC%84%9C%EA%B5%B0&pageNo=1&numOfRows=10";
 
+    //대구 중증 api
     String dis_dal_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EB%8B%AC%EC%84%9C%EA%B5%AC&SM_TYPE=1&pageNo=1&numOfRows=10";
     String dis_buk_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EB%B6%81%EA%B5%AC&SM_TYPE=1&pageNo=1&numOfRows=10";
     String dis_dong_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EB%8F%99%EA%B5%AC&SM_TYPE=1&pageNo=1&numOfRows=10";
@@ -69,12 +73,75 @@ public class AcceptableFragment extends Fragment {
     String dis_seo_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EC%84%9C%EA%B5%AC&SM_TYPE=1&pageNo=1&numOfRows=10";
     String dis_jung_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EC%A4%91%EA%B5%AC&SM_TYPE=1&pageNo=1&numOfRows=10";
     String dis_gun_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&STAGE2=%EB%8B%AC%EC%84%B1%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+
+    //경북 응급실 api
+    String room_gs_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B2%BD%EC%82%B0%EC%8B%9C&pageNo=1&numOfRows=10";
+    String room_gj_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B2%BD%EC%A3%BC%EC%8B%9C&pageNo=1&numOfRows=10";
+    String room_gr_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B3%A0%EB%A0%B9%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_gm_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B5%AC%EB%AF%B8%EC%8B%9C&pageNo=1&numOfRows=10";
+    String room_gw_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B5%B0%EC%9C%84%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_gc_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B9%80%EC%B2%9C%EC%8B%9C&pageNo=1&numOfRows=10";
+    String room_mg_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EB%AC%B8%EA%B2%BD%EC%8B%9C&pageNo=1&numOfRows=10";
+    String room_bh_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EB%B4%89%ED%99%94%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_sangj_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%83%81%EC%A3%BC%EC%8B%9C&pageNo=1&numOfRows=10";
+    String room_seongj_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%84%B1%EC%A3%BC%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_ad_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%95%88%EB%8F%99%EC%8B%9C&pageNo=1&numOfRows=10";
+    String room_yd_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%81%EB%8D%95%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_yy_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%81%EC%96%91%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_yj_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%81%EC%A3%BC%EC%8B%9C&pageNo=1&numOfRows=10";
+    String room_yeongc_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%81%EC%B2%9C%EC%8B%9C&pageNo=1&numOfRows=10";
+    String room_yec_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%88%EC%B2%9C%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_uldo_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%9A%B8%EB%A6%89%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_ulgin_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%9A%B8%EC%A7%84%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_us_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%9D%98%EC%84%B1%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_cd_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%B2%AD%EB%8F%84%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_cs_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%B2%AD%EC%86%A1%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_cg_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%B9%A0%EA%B3%A1%EA%B5%B0&pageNo=1&numOfRows=10";
+    String room_ph_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%ED%8F%AC%ED%95%AD%EC%8B%9C&pageNo=1&numOfRows=10";
+
+    //경북 중증 api
+    String dis_gs_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B2%BD%EC%82%B0%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_gj_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B2%BD%EC%A3%BC%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_gr_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B3%A0%EB%A0%B9%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_gm_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B5%AC%EB%AF%B8%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_gw_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B5%B0%EC%9C%84%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_gc_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EA%B9%80%EC%B2%9C%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_mg_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EB%AC%B8%EA%B2%BD%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_bh_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EB%B4%89%ED%99%94%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_sangj_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%83%81%EC%A3%BC%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_seongj_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%84%B1%EC%A3%BC%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_ad_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%95%88%EB%8F%99%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_yd_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%81%EB%8D%95%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_yy_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%81%EC%96%91%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_yj_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%81%EC%A3%BC%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_yeongc_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%81%EC%B2%9C%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_yec_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%98%88%EC%B2%9C%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_uldo_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%9A%B8%EB%A6%89%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_ulgin_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%9A%B8%EC%A7%84%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_us_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%9D%98%EC%84%B1%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_cd_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%B2%AD%EB%8F%84%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_cs_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%B2%AD%EC%86%A1%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_cg_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%B9%A0%EA%B3%A1%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String dis_ph_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%ED%8F%AC%ED%95%AD%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         acceptableViewModel =
                 ViewModelProviders.of(this).get(AcceptableViewModel.class);
         View root = inflater.inflate(R.layout.fragment_acceptable, container, false);
-        txt_room=(TextView)root.findViewById(R.id.text_room);
-        txt_dis=(TextView)root.findViewById(R.id.text_dis);
+        txt_er=(TextView)root.findViewById(R.id.txt_er);
+        txt_ward=(TextView)root.findViewById(R.id.txt_ward);
+        txt_ce_he=(TextView)root.findViewById(R.id.txt_ce_he);
+        txt_ce_in=(TextView)root.findViewById(R.id.txt_ce_in);
+        txt_mi=(TextView)root.findViewById(R.id.txt_mi);
+        txt_ab_in=(TextView)root.findViewById(R.id.txt_ab_in);
+        txt_massive_bu=(TextView)root.findViewById(R.id.txt_massive_bu);
+        txt_connect_li=(TextView)root.findViewById(R.id.txt_connect_li);
+        txt_em_en=(TextView)root.findViewById(R.id.txt_em_en);
+        txt_em_di=(TextView)root.findViewById(R.id.txt_em_di);
+        txt_pre_mom=(TextView)root.findViewById(R.id.txt_pre_mom);
+        txt_mental_pat=(TextView)root.findViewById(R.id.txt_mental_pat);
+        txt_baby=(TextView)root.findViewById(R.id.txt_baby);
+        hop_name=(TextView)root.findViewById(R.id.hop_name);
         spinner1=(Spinner)root.findViewById(R.id.spinner1);
         spinner2=(Spinner)root.findViewById(R.id.spinner2);
 
@@ -113,8 +180,7 @@ public class AcceptableFragment extends Fragment {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             select_gb= (String) adapterView.getItemAtPosition(i);
-                            //txt_room.setText(select_gb);
-                        }
+                         }
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
                         }
@@ -133,8 +199,8 @@ public class AcceptableFragment extends Fragment {
         room_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //응급실 체크박스 선택
-                if(er_check.isChecked()){
+                //응급실이나 입원실 체크박스 선택
+                if(er_check.isChecked() || ward_check.isChecked()){
                     if (select_dg.equals("달서구")) {
                         DownloadWebpageTask task = new DownloadWebpageTask();
                         task.execute(room_dal_api);
@@ -167,44 +233,91 @@ public class AcceptableFragment extends Fragment {
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gun_api);
                     }
-
+                    if(select_gb.equals("경산시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_gs_api);
+                    }
+                    else if(select_gb.equals("경주시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_gj_api);
+                    }
+                    else if(select_gb.equals("고령군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_gr_api);
+                    }
+                    else if(select_gb.equals("구미시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_gm_api);
+                    }
+                    else if(select_gb.equals("군위군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_gw_api);
+                    }
+                    else if(select_gb.equals("김천시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_gc_api);
+                    }
+                    else if(select_gb.equals("문경시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_mg_api);
+                    }
+                    else if(select_gb.equals("봉화군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_bh_api);
+                    }
+                    else if(select_gb.equals("상주시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_sangj_api);
+                    }else if(select_gb.equals("성주군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_seongj_api);
+                    }else if(select_gb.equals("안동시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_ad_api);
+                    }else if(select_gb.equals("영덕군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_yd_api);
+                    }else if(select_gb.equals("영양군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_yy_api);
+                    }else if(select_gb.equals("영주시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_yj_api);
+                    }else if(select_gb.equals("영천시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_yeongc_api);
+                    }else if(select_gb.equals("예천군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_yec_api);
+                    }else if(select_gb.equals("울릉군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_uldo_api);
+                    }else if(select_gb.equals("울진군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_ulgin_api);
+                    }else if(select_gb.equals("의성군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_us_api);
+                    }else if(select_gb.equals("청도군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_cd_api);
+                    }else if(select_gb.equals("청송군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_cs_api);
+                    }else if(select_gb.equals("칠곡군")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_cg_api);
+                    }
+                    else if(select_gb.equals("포항시")){
+                        DownloadWebpageTask task=new DownloadWebpageTask();
+                        task.execute(room_gj_api);
+                    }
                 }
-                //입원실 체크박스 선택
-                else if(ward_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask2 task = new DownloadWebpageTask2();
-                        task.execute(room_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
-                        task.execute(room_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
-                        task.execute(room_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
-                        task.execute(room_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
-                        task.execute(room_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
-                        task.execute(room_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
-                        task.execute(room_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
-                        task.execute(room_gun_api);
-                    }
-                } else if(!er_check.isChecked()&& !ward_check.isChecked()){
-                    txt_room.setText(" ");
+                else if(!er_check.isChecked()){
+                    txt_er.setText(" ");
+                }
+                else if(!ward_check.isChecked()){
+                    txt_ward.setText(" ");
                 }
             }
         });
@@ -225,391 +338,159 @@ public class AcceptableFragment extends Fragment {
         dis_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //뇌출혈 체크박스 선택
-                if(ce_he_check.isChecked()){
+                //중증질환 체크박스 선택
+                if( ce_he_check.isChecked()||  ce_in_check.isChecked() || mi_check.isChecked()|| ab_in_check.isChecked()|| massive_bu_check.isChecked()|| connect_li_check.isChecked()|| em_en_check.isChecked()|| em_di_check.isChecked()|| pre_mom_check.isChecked()|| mental_pat_check.isChecked()|| baby_check.isChecked()){
                     if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask3 task = new DownloadWebpageTask3();
+                        DownloadWebpageTask2 task = new DownloadWebpageTask2();
                         task.execute(dis_dal_api);
                     }
                     else if(select_dg.equals("북구")){
-                        DownloadWebpageTask3 task=new DownloadWebpageTask3();
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_buk_api);
                     }
                     else if(select_dg.equals("동구")){
-                        DownloadWebpageTask3 task=new DownloadWebpageTask3();
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_dong_api);
                     }
                     else if(select_dg.equals("남구")){
-                        DownloadWebpageTask3 task=new DownloadWebpageTask3();
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_nam_api);
                     }
                     else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask3 task=new DownloadWebpageTask3();
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_su_api);
                     }
                     else if(select_dg.equals("서구")){
-                        DownloadWebpageTask3 task=new DownloadWebpageTask3();
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_seo_api);
                     }
                     else if(select_dg.equals("중구")){
-                        DownloadWebpageTask3 task=new DownloadWebpageTask3();
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_jung_api);
                     }
                     else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask3 task=new DownloadWebpageTask3();
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gun_api);
                     }
-
+                    if(select_gb.equals("경산시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_gs_api);
+                    }
+                    else if(select_gb.equals("경주시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_gj_api);
+                    }
+                    else if(select_gb.equals("고령군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_gr_api);
+                    }
+                    else if(select_gb.equals("구미시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_gm_api);
+                    }
+                    else if(select_gb.equals("군위군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_gw_api);
+                    }
+                    else if(select_gb.equals("김천시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_gc_api);
+                    }
+                    else if(select_gb.equals("문경시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_mg_api);
+                    }
+                    else if(select_gb.equals("봉화군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_bh_api);
+                    }
+                    else if(select_gb.equals("상주시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_sangj_api);
+                    }else if(select_gb.equals("성주군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_seongj_api);
+                    }else if(select_gb.equals("안동시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_ad_api);
+                    }else if(select_gb.equals("영덕군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_yd_api);
+                    }else if(select_gb.equals("영양군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_yy_api);
+                    }else if(select_gb.equals("영주시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_yj_api);
+                    }else if(select_gb.equals("영천시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_yeongc_api);
+                    }else if(select_gb.equals("예천군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_yec_api);
+                    }else if(select_gb.equals("울릉군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_uldo_api);
+                    }else if(select_gb.equals("울진군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_ulgin_api);
+                    }else if(select_gb.equals("의성군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_us_api);
+                    }else if(select_gb.equals("청도군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_cd_api);
+                    }else if(select_gb.equals("청송군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_cs_api);
+                    }else if(select_gb.equals("칠곡군")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_cg_api);
+                    }
+                    else if(select_gb.equals("포항시")){
+                        DownloadWebpageTask2 task=new DownloadWebpageTask2();
+                        task.execute(dis_gj_api);
+                    }
                 }
-                //뇌경색 체크박스 선택
-                else if(ce_in_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask4 task = new DownloadWebpageTask4();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask4 task=new DownloadWebpageTask4();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask4 task=new DownloadWebpageTask4();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask4 task=new DownloadWebpageTask4();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask4 task=new DownloadWebpageTask4();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask4 task=new DownloadWebpageTask4();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask4 task=new DownloadWebpageTask4();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask4 task=new DownloadWebpageTask4();
-                        task.execute(dis_gun_api);
-                    }
-                } //심근경색
-                else if(mi_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask5 task = new DownloadWebpageTask5();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask5 task= new DownloadWebpageTask5();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask5 task= new DownloadWebpageTask5();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask5 task= new DownloadWebpageTask5();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask5 task = new DownloadWebpageTask5();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask5 task= new DownloadWebpageTask5();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask5 task= new DownloadWebpageTask5();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask5 task= new DownloadWebpageTask5();
-                        task.execute(dis_gun_api);
-                    }
-                }//복부손상
-                else if(ab_in_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask6 task = new DownloadWebpageTask6();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask6 task= new DownloadWebpageTask6();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask6 task= new DownloadWebpageTask6();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask6 task= new DownloadWebpageTask6();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask6 task= new DownloadWebpageTask6();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask6 task= new DownloadWebpageTask6();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask6 task= new DownloadWebpageTask6();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask6 task= new DownloadWebpageTask6();
-                        task.execute(dis_gun_api);
-                    }
-                }//중증화상
-                else if(massive_bu_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask7 task = new DownloadWebpageTask7();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask7 task= new DownloadWebpageTask7();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask7 task= new DownloadWebpageTask7();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask7 task= new DownloadWebpageTask7();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask7 task= new DownloadWebpageTask7();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask7 task= new DownloadWebpageTask7();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask7 task= new DownloadWebpageTask7();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask7 task= new DownloadWebpageTask7();
-                        task.execute(dis_gun_api);
-                    }
-                }//사지접합
-                else if(connect_li_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask8 task = new DownloadWebpageTask8();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask8 task= new DownloadWebpageTask8();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask8 task= new DownloadWebpageTask8();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask8 task= new DownloadWebpageTask8();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask8 task= new DownloadWebpageTask8();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask8 task= new DownloadWebpageTask8();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask8 task= new DownloadWebpageTask8();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask8 task= new DownloadWebpageTask8();
-                        task.execute(dis_gun_api);
-                    }
-                }//응급내시경
-                else if(em_en_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask9 task = new DownloadWebpageTask9();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask9 task= new DownloadWebpageTask9();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask9 task= new DownloadWebpageTask9();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask9 task= new DownloadWebpageTask9();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask9 task= new DownloadWebpageTask9();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask9 task= new DownloadWebpageTask9();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask9 task= new DownloadWebpageTask9();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask9 task= new DownloadWebpageTask9();
-                        task.execute(dis_gun_api);
-                    }
-                }//응급투석
-                else if(em_di_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask10 task = new DownloadWebpageTask10();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask10 task= new DownloadWebpageTask10();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask10 task= new DownloadWebpageTask10();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask10 task= new DownloadWebpageTask10();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask10 task= new DownloadWebpageTask10();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask10 task= new DownloadWebpageTask10();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask10 task= new DownloadWebpageTask10();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask10 task= new DownloadWebpageTask10();
-                        task.execute(dis_gun_api);
-                    }
-                }//조산산모
-                else if(pre_mom_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask11 task = new DownloadWebpageTask11();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask11 task= new DownloadWebpageTask11();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask11 task= new DownloadWebpageTask11();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask11 task= new DownloadWebpageTask11();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask11 task= new DownloadWebpageTask11();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask11 task= new DownloadWebpageTask11();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask11 task= new DownloadWebpageTask11();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask11 task= new DownloadWebpageTask11();
-                        task.execute(dis_gun_api);
-                    }
-                }//정신질환자
-                else if(mental_pat_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask12 task = new DownloadWebpageTask12();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask12 task= new DownloadWebpageTask12();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask12 task= new DownloadWebpageTask12();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask12 task= new DownloadWebpageTask12();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask12 task= new DownloadWebpageTask12();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask12 task= new DownloadWebpageTask12();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask12 task= new DownloadWebpageTask12();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask12 task= new DownloadWebpageTask12();
-                        task.execute(dis_gun_api);
-                    }
-                }//신생아
-                else if(baby_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
-                        DownloadWebpageTask13 task = new DownloadWebpageTask13();
-                        task.execute(dis_dal_api);
-                    }
-                    else if(select_dg.equals("북구")){
-                        DownloadWebpageTask13 task= new DownloadWebpageTask13();
-                        task.execute(dis_buk_api);
-                    }
-                    else if(select_dg.equals("동구")){
-                        DownloadWebpageTask13 task= new DownloadWebpageTask13();
-                        task.execute(dis_dong_api);
-                    }
-                    else if(select_dg.equals("남구")){
-                        DownloadWebpageTask13 task= new DownloadWebpageTask13();
-                        task.execute(dis_nam_api);
-                    }
-                    else if(select_dg.equals("수성구")){
-                        DownloadWebpageTask13 task= new DownloadWebpageTask13();
-                        task.execute(dis_su_api);
-                    }
-                    else if(select_dg.equals("서구")){
-                        DownloadWebpageTask13 task= new DownloadWebpageTask13();
-                        task.execute(dis_seo_api);
-                    }
-                    else if(select_dg.equals("중구")){
-                        DownloadWebpageTask13 task= new DownloadWebpageTask13();
-                        task.execute(dis_jung_api);
-                    }
-                    else if(select_dg.equals("달서군")){
-                        DownloadWebpageTask13 task= new DownloadWebpageTask13();
-                        task.execute(dis_gun_api);
-                    }
-                }else if(!ce_he_check.isChecked()&& !ce_in_check.isChecked() &&!mi_check.isChecked()&&!ab_in_check.isChecked()&&!massive_bu_check.isChecked()&&!connect_li_check.isChecked()&&!em_en_check.isChecked()&&!em_di_check.isChecked()&&!pre_mom_check.isChecked()&&!mental_pat_check.isChecked()&&!baby_check.isChecked()){
-                    txt_dis.setText(" ");
+                else if(!ce_he_check.isChecked()){
+                    txt_ce_he.setText(" ");
+                }
+                else if(!ce_in_check.isChecked()){
+                    txt_ce_in.setText(" ");
+                }
+                else if(!mi_check.isChecked()){
+                    txt_mi.setText(" ");
+                }
+                else if(!ab_in_check.isChecked()){
+                    txt_ab_in.setText(" ");
+                }
+                else if(!massive_bu_check.isChecked()){
+                    txt_massive_bu.setText(" ");
+                }
+                else if(!connect_li_check.isChecked()){
+                    txt_connect_li.setText(" ");
+                }
+                else if(!em_en_check.isChecked()){
+                    txt_em_en.setText(" ");
+                }
+                else if(!em_di_check.isChecked()){
+                    txt_em_di.setText(" ");
+                }
+                else if(!pre_mom_check.isChecked()){
+                    txt_pre_mom.setText(" ");
+                }
+                else if(!mental_pat_check.isChecked()){
+                    txt_mental_pat.setText(" ");
+                }
+                else if(!baby_check.isChecked()){
+                    txt_baby.setText(" ");
                 }
             }
         });
 
         return root;
     }
-////응급실
+//응급실 or 입원실
     private class DownloadWebpageTask extends AsyncTask<String, Void, String>{
         protected String doInBackground(String... urls){
             try{
@@ -624,7 +505,8 @@ public class AcceptableFragment extends Fragment {
             boolean indutyName=false, inhvec=false, inhvgc=false, initem=false;
             String dutyName=null; String hvec=null; String hvgc=null;
             super.onPostExecute(result);
-            txt_room.setText(" ");
+            txt_er.setText(" ");
+            txt_ward.setText(" ");
             try {// XML Pull Parser 객체생성
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -644,6 +526,9 @@ public class AcceptableFragment extends Fragment {
                             if(xpp.getName().equals("hvec")){
                                 inhvec=true;
                             }
+                            if(xpp.getName().equals("hvgc")){
+                                inhvgc=true;
+                            }
                             break;
                         case XmlPullParser.TEXT:
                             if(indutyName){
@@ -654,95 +539,18 @@ public class AcceptableFragment extends Fragment {
                                 hvec=xpp.getText();
                                 inhvec=false;
                             }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_room.append("병원 이름: "+
-                                        dutyName+"\n 응급실 잔여병상: "+
-                                        hvec+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_room.setText("error");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-
-//입원실
-    private class DownloadWebpageTask2 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inhvec=false, inhvgc=false, initem=false;
-            String dutyName=null; String hvec=null; String hvgc=null;
-            super.onPostExecute(result);
-            txt_room.setText("");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
-                            if(xpp.getName().equals("hvgc")){
-                                inhvgc=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
                             if(inhvgc){
                                 hvgc=xpp.getText();
                                 inhvgc=false;
                             }
                             break;
                         case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_room.append("병원 이름: "+
-                                        dutyName+"\n 입원실 잔여 병상: "+
-                                        hvgc+"\n\n");
+                            if(xpp.getName().equals("item") && er_check.isChecked()){
+                                txt_er.append(dutyName+"\n"+"[응급실]"+hvec+"\n\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && ward_check.isChecked()){
+                                txt_ward.append(dutyName+"\n"+"[입원실]"+hvgc+"\n\n");
                                 initem=false;
                             }
                             break;
@@ -750,7 +558,8 @@ public class AcceptableFragment extends Fragment {
                     eventType=xpp.next();
                 }
             }catch (Exception e){
-                txt_room.setText("error");
+                txt_er.setText("error");
+                txt_ward.setText("error");
             }
         }
         private String downloadUrl(String api)throws IOException{
@@ -774,8 +583,9 @@ public class AcceptableFragment extends Fragment {
 
         }
     }
-    //뇌출혈
-    private class DownloadWebpageTask3 extends AsyncTask<String, Void, String>{
+
+    //중증 응급 질환
+    private class DownloadWebpageTask2 extends AsyncTask<String, Void, String>{
         protected String doInBackground(String... urls){
             try{
                 String txt=(String)downloadUrl((String)urls[0]);
@@ -788,8 +598,18 @@ public class AcceptableFragment extends Fragment {
         protected void onPostExecute(String result){
             boolean indutyName=false, inMKioskTy1=false, initem=false;
             String dutyName=null; String MKioskTy1=null;
+            boolean inMKioskTy2=false, inMKioskTy3=false, inMKioskTy4=false,
+                    inMKioskTy5=false, inMKioskTy6=false, inMKioskTy7=false,
+                    inMKioskTy8=false, inMKioskTy9=false, inMKioskTy10=false,
+                    inMKioskTy11=false, intotalCount=false;
+            String MKioskTy2=null; String MKioskTy3=null; String MKioskTy4=null;
+            String MKioskTy5=null; String MKioskTy6=null; String MKioskTy7=null;
+            String MKioskTy8=null; String MKioskTy9=null; String MKioskTy10=null;
+            String MKioskTy11=null; Integer totalCount=0;
             super.onPostExecute(result);
-            txt_dis.setText(" ");
+            txt_ce_he.setText(" "); txt_ce_in.setText(" "); txt_mi.setText(" "); txt_ab_in.setText(" ");
+            txt_massive_bu.setText(" "); txt_connect_li.setText(" "); txt_em_en.setText(" "); txt_em_di.setText(" ");
+            txt_pre_mom.setText(" "); txt_mental_pat.setText(" "); txt_baby.setText(" ");
             try {// XML Pull Parser 객체생성
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -804,855 +624,143 @@ public class AcceptableFragment extends Fragment {
                     switch (eventType){
                         case XmlPullParser.START_TAG:
                             if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
+                                indutyName=true; }
                             if(xpp.getName().equals("MKioskTy1")){
-                                inMKioskTy1=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
-                            if(inMKioskTy1){
-                                MKioskTy1=xpp.getText();
-                                inMKioskTy1=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy1+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //뇌경색
-    private class DownloadWebpageTask4 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy2=false, initem=false;
-            String dutyName=null; String MKioskTy2=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
+                                inMKioskTy1=true; }
                             if(xpp.getName().equals("MKioskTy2")){
-                                inMKioskTy2=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
-                            if(inMKioskTy2){
-                                MKioskTy2=xpp.getText();
-                                inMKioskTy2=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy2+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //심근경색
-    private class DownloadWebpageTask5 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy3=false, initem=false;
-            String dutyName=null; String MKioskTy3=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
+                                inMKioskTy2=true; }
                             if(xpp.getName().equals("MKioskTy3")){
                                 inMKioskTy3=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
-                            if(inMKioskTy3){
-                                MKioskTy3=xpp.getText();
-                                inMKioskTy3=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy3+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //복부손상
-    private class DownloadWebpageTask6 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy4=false, initem=false;
-            String dutyName=null; String MKioskTy4=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
-                            if(xpp.getName().equals("MKioskTy4")){
+                            }if(xpp.getName().equals("MKioskTy4")){
                                 inMKioskTy4=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
-                            if(inMKioskTy4){
-                                MKioskTy4=xpp.getText();
-                                inMKioskTy4=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy4+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //중증화상
-    private class DownloadWebpageTask7 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy5=false, initem=false;
-            String dutyName=null; String MKioskTy5=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
-                            if(xpp.getName().equals("MKioskTy5")){
+                            }if(xpp.getName().equals("MKioskTy5")){
                                 inMKioskTy5=true;
+                            }if(xpp.getName().equals("MKioskTy6")){
+                                inMKioskTy6=true;
+                            }if(xpp.getName().equals("MKioskTy7")){
+                                inMKioskTy7=true;
+                            }if(xpp.getName().equals("MKioskTy8")){
+                                inMKioskTy8=true;
+                            }if(xpp.getName().equals("MKioskTy9")){
+                                inMKioskTy9=true;
+                            }if(xpp.getName().equals("MKioskTy10")){
+                                inMKioskTy10=true;
+                            }if(xpp.getName().equals("MKioskTy11")){
+                                inMKioskTy11=true;
+                            }if(xpp.getName().equals("totalCount")){
+                                intotalCount=true;
                             }
                             break;
                         case XmlPullParser.TEXT:
                             if(indutyName){
                                 dutyName=xpp.getText();
-                                indutyName=false;
-                            }
+                                indutyName=false; }
+                            if(inMKioskTy1){
+                                MKioskTy1=xpp.getText();
+                                inMKioskTy1=false; }
+                            if(inMKioskTy2){
+                                MKioskTy2=xpp.getText();
+                                inMKioskTy2=false; }
+                            if(inMKioskTy3){
+                              MKioskTy3=xpp.getText();
+                              inMKioskTy3=false; }
+                            if(inMKioskTy4){
+                               MKioskTy4=xpp.getText();
+                               inMKioskTy4=false; }
                             if(inMKioskTy5){
                                 MKioskTy5=xpp.getText();
-                                inMKioskTy5=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy5+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //사지접합
-    private class DownloadWebpageTask8 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy6=false, initem=false;
-            String dutyName=null; String MKioskTy6=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
-                            if(xpp.getName().equals("MKioskTy6")){
-                                inMKioskTy6=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
+                                inMKioskTy5=false; }
                             if(inMKioskTy6){
-                                MKioskTy6=xpp.getText();
-                                inMKioskTy6=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy6+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //응급내시경
-    private class DownloadWebpageTask9 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy7=false, initem=false;
-            String dutyName=null; String MKioskTy7=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
-                            if(xpp.getName().equals("MKioskTy7")){
-                                inMKioskTy7=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
+                              MKioskTy6=xpp.getText();
+                              inMKioskTy6=false; }
                             if(inMKioskTy7){
-                                MKioskTy7=xpp.getText();
-                                inMKioskTy7=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy7+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //응급투석
-    private class DownloadWebpageTask10 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy8=false, initem=false;
-            String dutyName=null; String MKioskTy8=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
-                            if(xpp.getName().equals("MKioskTy8")){
-                                inMKioskTy8=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
+                               MKioskTy7=xpp.getText();
+                              inMKioskTy7=false; }
                             if(inMKioskTy8){
                                 MKioskTy8=xpp.getText();
-                                inMKioskTy8=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy8+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //조산산모
-    private class DownloadWebpageTask11 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy9=false, initem=false;
-            String dutyName=null; String MKioskTy9=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
-                            if(xpp.getName().equals("MKioskTy9")){
-                                inMKioskTy9=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
+                                inMKioskTy8=false; }
                             if(inMKioskTy9){
-                                MKioskTy9=xpp.getText();
-                                inMKioskTy9=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy9+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //정신질환자
-    private class DownloadWebpageTask12 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy10=false, initem=false;
-            String dutyName=null; String MKioskTy10=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
-                            if(xpp.getName().equals("MKioskTy10")){
-                                inMKioskTy10=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
+                               MKioskTy9=xpp.getText();
+                              inMKioskTy9=false; }
                             if(inMKioskTy10){
                                 MKioskTy10=xpp.getText();
-                                inMKioskTy10=false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy10+"\n\n");
-                                initem=false;
-                            }
-                            break;
-                    }
-                    eventType=xpp.next();
-                }
-            }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
-            }
-        }
-        private String downloadUrl(String api)throws IOException{
-            HttpURLConnection conn=null;
-
-            try{
-                URL url=new URL(api);
-                conn=(HttpURLConnection)url.openConnection();
-                BufferedInputStream buf=new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufreader=new BufferedReader(new InputStreamReader(buf, "utf-8"));
-
-                String line=null;
-                String page="";
-                while((line=bufreader.readLine())!=null){
-                    page+=line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-
-        }
-    }
-    //신생아
-    private class DownloadWebpageTask13 extends AsyncTask<String, Void, String>{
-        protected String doInBackground(String... urls){
-            try{
-                String txt=(String)downloadUrl((String)urls[0]);
-                return txt;
-            }
-            catch (IOException e){
-                return "다운로드 실패";
-            }
-        }
-        protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy11=false, initem=false;
-            String dutyName=null; String MKioskTy11=null;
-            super.onPostExecute(result);
-            txt_dis.setText(" ");
-            try {// XML Pull Parser 객체생성
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                // XML namespace 지원여부설정. 디폴트는false
-                XmlPullParser xpp= factory.newPullParser();
-                // 파싱할문서설정
-                xpp.setInput(new StringReader(result));
-                // 현재이벤트유형반환(START_DOCUMENT, START_TAG, TEXT, END_TAG, END_DOCUMENT)
-                int eventType=xpp.getEventType();
-                //여기까지 파싱 시작
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType){
-                        case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("dutyName")){
-                                indutyName=true;
-                            }
-                            if(xpp.getName().equals("MKioskTy11")){
-                                inMKioskTy11=true;
-                            }
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(indutyName){
-                                dutyName=xpp.getText();
-                                indutyName=false;
-                            }
+                                inMKioskTy10=false; }
                             if(inMKioskTy11){
                                 MKioskTy11=xpp.getText();
-                                inMKioskTy11=false;
+                                inMKioskTy11=false; }
+                            if(intotalCount){
+                                totalCount=Integer.parseInt(xpp.getText());
+                                intotalCount=false;
                             }
                             break;
+
                         case XmlPullParser.END_TAG:
-                            if(xpp.getName().equals("item")){
-                                txt_dis.append("병원 이름: "+
-                                        dutyName+"\n 수용 가능 여부: "+
-                                        MKioskTy11+"\n\n");
+                            if(xpp.getName().equals("item") && ce_he_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_ce_he.append("[뇌출혈] "+MKioskTy1+"\n");
                                 initem=false;
+                            }
+                            if(xpp.getName().equals("item") && ce_in_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_ce_in.append("[뇌경색] "+MKioskTy2+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && mi_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_mi.append("[심근경색] "+MKioskTy3+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && ab_in_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_ab_in.append("[복부손상] "+MKioskTy4+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && massive_bu_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_massive_bu.append("[중증화상] "+MKioskTy5+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && connect_li_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_connect_li.append("[사지접합] "+MKioskTy6+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && em_en_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_em_en.append("[응급내시경] "+MKioskTy7+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && em_di_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_em_di.append("[응급투석] "+MKioskTy8+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && pre_mom_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_pre_mom.append("[조산산모] "+MKioskTy9+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && mental_pat_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_mental_pat.append("[정신질환자] "+MKioskTy10+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("item") && baby_check.isChecked()){
+                                hop_name.setText(dutyName);
+                                txt_baby.append("[신생아] "+MKioskTy11+"\n");
+                                initem=false;
+                            }
+                            if(xpp.getName().equals("totalCount")){
+                                if(totalCount==0){
+                                    hop_name.setText("없음");
+                                }
                             }
                             break;
                     }
                     eventType=xpp.next();
                 }
             }catch (Exception e){
-                txt_dis.setText("에러ㅜ");
+                hop_name.setText("error");
             }
         }
         private String downloadUrl(String api)throws IOException{
