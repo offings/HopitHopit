@@ -1,10 +1,8 @@
 package com.example.hopithopit.ui.acceptable;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Contacts;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +10,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.hopithopit.MainActivity;
 import com.example.hopithopit.R;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -172,7 +166,7 @@ public class AcceptableFragment extends Fragment {
                         }
                     });
                 }
-                else{
+                else if (adapter1.getItem(i).equals("경북")){
                     final ArrayAdapter<String> adapter2=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, gb);
                     adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner2.setAdapter(adapter2);
@@ -180,7 +174,7 @@ public class AcceptableFragment extends Fragment {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             select_gb= (String) adapterView.getItemAtPosition(i);
-                         }
+                        }
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
                         }
@@ -233,7 +227,7 @@ public class AcceptableFragment extends Fragment {
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gun_api);
                     }
-                    if(select_gb.equals("경산시")){
+                    else if(select_gb.equals("경산시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gs_api);
                     }
@@ -310,8 +304,10 @@ public class AcceptableFragment extends Fragment {
                     }
                     else if(select_gb.equals("포항시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
-                        task.execute(room_gj_api);
+                        task.execute(room_ph_api);
                     }
+                    select_dg=" ";
+                    select_gb=" ";
                 }
                 else if(!er_check.isChecked()){
                     txt_er.setText(" ");
@@ -372,7 +368,7 @@ public class AcceptableFragment extends Fragment {
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gun_api);
                     }
-                    if(select_gb.equals("경산시")){
+                    else if(select_gb.equals("경산시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gs_api);
                     }
@@ -449,9 +445,12 @@ public class AcceptableFragment extends Fragment {
                     }
                     else if(select_gb.equals("포항시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
-                        task.execute(dis_gj_api);
+                        task.execute(dis_ph_api);
                     }
+                    select_dg=" ";
+                    select_gb=" ";
                 }
+
                 else if(!ce_he_check.isChecked()){
                     txt_ce_he.setText(" ");
                 }
