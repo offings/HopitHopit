@@ -7,16 +7,10 @@
     android:orientation="vertical"
     tools:context=".ui.hospinfo.HospinfoFragment">
 
-    <TextView
-        android:id="@+id/text_hospinfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="병원정보" />
-
     <GridView
         android:id="@+id/hospinfoGridView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:numColumns="4"
         android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
