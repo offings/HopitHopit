@@ -704,57 +704,57 @@ public class AcceptableFragment extends Fragment {
                         case XmlPullParser.END_TAG:
                             if(xpp.getName().equals("item") && ce_he_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_ce_he.append("[뇌출혈] "+MKioskTy1+"\n");
+                                txt_ce_he.append("[뇌출혈] "+MKioskTy1);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && ce_in_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_ce_in.append("[뇌경색] "+MKioskTy2+"\n");
+                                txt_ce_in.append("[뇌경색] "+MKioskTy2);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && mi_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_mi.append("[심근경색] "+MKioskTy3+"\n");
+                                txt_mi.append("[심근경색] "+MKioskTy3);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && ab_in_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_ab_in.append("[복부손상] "+MKioskTy4+"\n");
+                                txt_ab_in.append("[복부손상] "+MKioskTy4);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && massive_bu_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_massive_bu.append("[중증화상] "+MKioskTy5+"\n");
+                                txt_massive_bu.append("[중증화상] "+MKioskTy5);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && connect_li_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_connect_li.append("[사지접합] "+MKioskTy6+"\n");
+                                txt_connect_li.append("[사지접합] "+MKioskTy6);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && em_en_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_em_en.append("[응급내시경] "+MKioskTy7+"\n");
+                                txt_em_en.append("[응급내시경] "+MKioskTy7);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && em_di_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_em_di.append("[응급투석] "+MKioskTy8+"\n");
+                                txt_em_di.append("[응급투석] "+MKioskTy8);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && pre_mom_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_pre_mom.append("[조산산모] "+MKioskTy9+"\n");
+                                txt_pre_mom.append("[조산산모] "+MKioskTy9);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && mental_pat_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_mental_pat.append("[정신질환자] "+MKioskTy10+"\n");
+                                txt_mental_pat.append("[정신질환자] "+MKioskTy10);
                                 initem=false;
                             }
                             if(xpp.getName().equals("item") && baby_check.isChecked()){
                                 hop_name.setText(dutyName);
-                                txt_baby.append("[신생아] "+MKioskTy11+"\n");
+                                txt_baby.append("[신생아] "+MKioskTy11);
                                 initem=false;
                             }
                             if(xpp.getName().equals("totalCount")){

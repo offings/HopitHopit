@@ -185,33 +185,54 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#474646">
 
             <TextView
                 android:id="@+id/hop_name"
+                android:background="#FFFFFF"
+                android:layout_marginBottom="1dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
             <TableRow
                 android:id="@+id/tableRow2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#474646">
                 <TextView
                     android:id="@+id/txt_ce_he"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/txt_ce_in"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/txt_mi"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/txt_ab_in"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -219,24 +240,42 @@
             <TableRow
                 android:id="@+id/tableRow3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#474646">
                 <TextView
                     android:id="@+id/txt_massive_bu"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/txt_connect_li"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/txt_em_en"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/txt_em_di"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -244,19 +283,33 @@
             <TableRow
                 android:id="@+id/tableRow4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#474646">
                 <TextView
                     android:id="@+id/txt_pre_mom"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/txt_mental_pat"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/txt_baby"
+                    android:background="#FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
