@@ -145,7 +145,7 @@ public class AcceptableFragment extends Fragment {
                 "예천군","울릉군","울진군","의성군","청도군","청송군","칠곡군","포항시"};
 
         //지역 조건 선택하는 spinner
-       final ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,dosi);
+        final ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,dosi);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -484,7 +484,7 @@ public class AcceptableFragment extends Fragment {
 
         return root;
     }
-//응급실 or 입원실
+    //응급실 or 입원실
     private class DownloadWebpageTask extends AsyncTask<String, Void, String>{
         protected String doInBackground(String... urls){
             try{
@@ -496,7 +496,7 @@ public class AcceptableFragment extends Fragment {
             }
         }
         protected void onPostExecute(String result){
-            boolean indutyName=false, inhvec=false, inhvgc=false, initem=false, intotalCount=false;;
+            boolean indutyName=false, inhvec=false, inhvgc=false, initem=false, intotalCount=false;
             String dutyName=null; String hvec=null; String hvgc=null;
             Integer totalCount=0;
             super.onPostExecute(result);
@@ -639,24 +639,24 @@ public class AcceptableFragment extends Fragment {
                             if(xpp.getName().equals("MKioskTy3")){
                                 inMKioskTy3=true;
                             }if(xpp.getName().equals("MKioskTy4")){
-                                inMKioskTy4=true;
-                            }if(xpp.getName().equals("MKioskTy5")){
-                                inMKioskTy5=true;
-                            }if(xpp.getName().equals("MKioskTy6")){
-                                inMKioskTy6=true;
-                            }if(xpp.getName().equals("MKioskTy7")){
-                                inMKioskTy7=true;
-                            }if(xpp.getName().equals("MKioskTy8")){
-                                inMKioskTy8=true;
-                            }if(xpp.getName().equals("MKioskTy9")){
-                                inMKioskTy9=true;
-                            }if(xpp.getName().equals("MKioskTy10")){
-                                inMKioskTy10=true;
-                            }if(xpp.getName().equals("MKioskTy11")){
-                                inMKioskTy11=true;
-                            }if(xpp.getName().equals("totalCount")){
-                                intotalCount=true;
-                            }
+                            inMKioskTy4=true;
+                        }if(xpp.getName().equals("MKioskTy5")){
+                            inMKioskTy5=true;
+                        }if(xpp.getName().equals("MKioskTy6")){
+                            inMKioskTy6=true;
+                        }if(xpp.getName().equals("MKioskTy7")){
+                            inMKioskTy7=true;
+                        }if(xpp.getName().equals("MKioskTy8")){
+                            inMKioskTy8=true;
+                        }if(xpp.getName().equals("MKioskTy9")){
+                            inMKioskTy9=true;
+                        }if(xpp.getName().equals("MKioskTy10")){
+                            inMKioskTy10=true;
+                        }if(xpp.getName().equals("MKioskTy11")){
+                            inMKioskTy11=true;
+                        }if(xpp.getName().equals("totalCount")){
+                            intotalCount=true;
+                        }
                             break;
                         case XmlPullParser.TEXT:
                             if(indutyName){
@@ -669,26 +669,26 @@ public class AcceptableFragment extends Fragment {
                                 MKioskTy2=xpp.getText();
                                 inMKioskTy2=false; }
                             if(inMKioskTy3){
-                              MKioskTy3=xpp.getText();
-                              inMKioskTy3=false; }
+                                MKioskTy3=xpp.getText();
+                                inMKioskTy3=false; }
                             if(inMKioskTy4){
-                               MKioskTy4=xpp.getText();
-                               inMKioskTy4=false; }
+                                MKioskTy4=xpp.getText();
+                                inMKioskTy4=false; }
                             if(inMKioskTy5){
                                 MKioskTy5=xpp.getText();
                                 inMKioskTy5=false; }
                             if(inMKioskTy6){
-                              MKioskTy6=xpp.getText();
-                              inMKioskTy6=false; }
+                                MKioskTy6=xpp.getText();
+                                inMKioskTy6=false; }
                             if(inMKioskTy7){
-                               MKioskTy7=xpp.getText();
-                              inMKioskTy7=false; }
+                                MKioskTy7=xpp.getText();
+                                inMKioskTy7=false; }
                             if(inMKioskTy8){
                                 MKioskTy8=xpp.getText();
                                 inMKioskTy8=false; }
                             if(inMKioskTy9){
-                               MKioskTy9=xpp.getText();
-                              inMKioskTy9=false; }
+                                MKioskTy9=xpp.getText();
+                                inMKioskTy9=false; }
                             if(inMKioskTy10){
                                 MKioskTy10=xpp.getText();
                                 inMKioskTy10=false; }
