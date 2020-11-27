@@ -15,11 +15,7 @@
         android:id="@+id/navigation_hospinfo"
         android:name="com.example.hopithopit.ui.hospinfo.HospinfoFragment"
         android:label="@string/title_hospinfo"
-        tools:layout="@layout/fragment_hospinfo" >
-        <action
-            android:id="@+id/action_navigation_hospinfo_to_hospinfoListFragment"
-            app:destination="@id/hospinfoListFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_hospinfo" />
 
     <fragment
         android:id="@+id/navigation_acceptable"
@@ -38,12 +34,4 @@
         android:name="com.example.hopithopit.ui.ambulance.AmbulanceFragment"
         android:label="@string/title_ambulance"
         tools:layout="@layout/fragment_ambulance" />
-
-    <fragment
-        android:id="@+id/hospinfoListFragment"
-        android:name="com.example.hopithopit.ui.hospinfo.HospinfoListFragment"
-        android:label="fragment_hospinfo_list"
-        tools:layout="@layout/fragment_hospinfo_list" />
-
-
 </navigation>
