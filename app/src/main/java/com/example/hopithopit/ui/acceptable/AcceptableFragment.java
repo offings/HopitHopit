@@ -37,8 +37,7 @@ public class AcceptableFragment extends Fragment {
     private Spinner spinner1;
     private Spinner spinner2;
     //선택된 대구 경북 시구군
-    private String select_dg;
-    private String select_gb;
+    private String select_dg_gb;
     //병상 출력, 중증 응급 질환 정보 출력
     TextView txt_er, txt_ward;
     TextView txt_ce_he, txt_ce_in, txt_mi, txt_ab_in, txt_massive_bu, txt_connect_li;
@@ -159,7 +158,7 @@ public class AcceptableFragment extends Fragment {
                     spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            select_dg= (String) adapterView.getItemAtPosition(i);
+                            select_dg_gb= (String) adapterView.getItemAtPosition(i);
                         }
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
@@ -173,7 +172,7 @@ public class AcceptableFragment extends Fragment {
                     spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            select_gb= (String) adapterView.getItemAtPosition(i);
+                            select_dg_gb= (String) adapterView.getItemAtPosition(i);
                         }
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
@@ -195,119 +194,117 @@ public class AcceptableFragment extends Fragment {
             public void onClick(View view) {
                 //응급실이나 입원실 체크박스 선택
                 if(er_check.isChecked() || ward_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
+                    if (select_dg_gb.equals("달서구")) {
                         DownloadWebpageTask task = new DownloadWebpageTask();
                         task.execute(room_dal_api);
                     }
-                    else if(select_dg.equals("북구")){
+                    else if(select_dg_gb.equals("북구")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_buk_api);
                     }
-                    else if(select_dg.equals("동구")){
+                    else if(select_dg_gb.equals("동구")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_dong_api);
                     }
-                    else if(select_dg.equals("남구")){
+                    else if(select_dg_gb.equals("남구")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_nam_api);
                     }
-                    else if(select_dg.equals("수성구")){
+                    else if(select_dg_gb.equals("수성구")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_su_api);
                     }
-                    else if(select_dg.equals("서구")){
+                    else if(select_dg_gb.equals("서구")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_seo_api);
                     }
-                    else if(select_dg.equals("중구")){
+                    else if(select_dg_gb.equals("중구")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_jung_api);
                     }
-                    else if(select_dg.equals("달서군")){
+                    else if(select_dg_gb.equals("달서군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gun_api);
                     }
-                    else if(select_gb.equals("경산시")){
+                    else if(select_dg_gb.equals("경산시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gs_api);
                     }
-                    else if(select_gb.equals("경주시")){
+                    else if(select_dg_gb.equals("경주시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gj_api);
                     }
-                    else if(select_gb.equals("고령군")){
+                    else if(select_dg_gb.equals("고령군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gr_api);
                     }
-                    else if(select_gb.equals("구미시")){
+                    else if(select_dg_gb.equals("구미시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gm_api);
                     }
-                    else if(select_gb.equals("군위군")){
+                    else if(select_dg_gb.equals("군위군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gw_api);
                     }
-                    else if(select_gb.equals("김천시")){
+                    else if(select_dg_gb.equals("김천시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_gc_api);
                     }
-                    else if(select_gb.equals("문경시")){
+                    else if(select_dg_gb.equals("문경시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_mg_api);
                     }
-                    else if(select_gb.equals("봉화군")){
+                    else if(select_dg_gb.equals("봉화군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_bh_api);
                     }
-                    else if(select_gb.equals("상주시")){
+                    else if(select_dg_gb.equals("상주시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_sangj_api);
-                    }else if(select_gb.equals("성주군")){
+                    }else if(select_dg_gb.equals("성주군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_seongj_api);
-                    }else if(select_gb.equals("안동시")){
+                    }else if(select_dg_gb.equals("안동시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_ad_api);
-                    }else if(select_gb.equals("영덕군")){
+                    }else if(select_dg_gb.equals("영덕군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_yd_api);
-                    }else if(select_gb.equals("영양군")){
+                    }else if(select_dg_gb.equals("영양군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_yy_api);
-                    }else if(select_gb.equals("영주시")){
+                    }else if(select_dg_gb.equals("영주시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_yj_api);
-                    }else if(select_gb.equals("영천시")){
+                    }else if(select_dg_gb.equals("영천시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_yeongc_api);
-                    }else if(select_gb.equals("예천군")){
+                    }else if(select_dg_gb.equals("예천군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_yec_api);
-                    }else if(select_gb.equals("울릉군")){
+                    }else if(select_dg_gb.equals("울릉군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_uldo_api);
-                    }else if(select_gb.equals("울진군")){
+                    }else if(select_dg_gb.equals("울진군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_ulgin_api);
-                    }else if(select_gb.equals("의성군")){
+                    }else if(select_dg_gb.equals("의성군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_us_api);
-                    }else if(select_gb.equals("청도군")){
+                    }else if(select_dg_gb.equals("청도군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_cd_api);
-                    }else if(select_gb.equals("청송군")){
+                    }else if(select_dg_gb.equals("청송군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_cs_api);
-                    }else if(select_gb.equals("칠곡군")){
+                    }else if(select_dg_gb.equals("칠곡군")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_cg_api);
                     }
-                    else if(select_gb.equals("포항시")){
+                    else if(select_dg_gb.equals("포항시")){
                         DownloadWebpageTask task=new DownloadWebpageTask();
                         task.execute(room_ph_api);
                     }
-                    select_dg=" ";
-                    select_gb=" ";
                 }
                 else if(!er_check.isChecked()){
                     txt_er.setText(" ");
@@ -336,119 +333,117 @@ public class AcceptableFragment extends Fragment {
             public void onClick(View view) {
                 //중증질환 체크박스 선택
                 if( ce_he_check.isChecked()||  ce_in_check.isChecked() || mi_check.isChecked()|| ab_in_check.isChecked()|| massive_bu_check.isChecked()|| connect_li_check.isChecked()|| em_en_check.isChecked()|| em_di_check.isChecked()|| pre_mom_check.isChecked()|| mental_pat_check.isChecked()|| baby_check.isChecked()){
-                    if (select_dg.equals("달서구")) {
+                    if (select_dg_gb.equals("달서구")) {
                         DownloadWebpageTask2 task = new DownloadWebpageTask2();
                         task.execute(dis_dal_api);
                     }
-                    else if(select_dg.equals("북구")){
+                    else if(select_dg_gb.equals("북구")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_buk_api);
                     }
-                    else if(select_dg.equals("동구")){
+                    else if(select_dg_gb.equals("동구")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_dong_api);
                     }
-                    else if(select_dg.equals("남구")){
+                    else if(select_dg_gb.equals("남구")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_nam_api);
                     }
-                    else if(select_dg.equals("수성구")){
+                    else if(select_dg_gb.equals("수성구")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_su_api);
                     }
-                    else if(select_dg.equals("서구")){
+                    else if(select_dg_gb.equals("서구")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_seo_api);
                     }
-                    else if(select_dg.equals("중구")){
+                    else if(select_dg_gb.equals("중구")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_jung_api);
                     }
-                    else if(select_dg.equals("달서군")){
+                    else if(select_dg_gb.equals("달서군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gun_api);
                     }
-                    else if(select_gb.equals("경산시")){
+                    else if(select_dg_gb.equals("경산시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gs_api);
                     }
-                    else if(select_gb.equals("경주시")){
+                    else if(select_dg_gb.equals("경주시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gj_api);
                     }
-                    else if(select_gb.equals("고령군")){
+                    else if(select_dg_gb.equals("고령군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gr_api);
                     }
-                    else if(select_gb.equals("구미시")){
+                    else if(select_dg_gb.equals("구미시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gm_api);
                     }
-                    else if(select_gb.equals("군위군")){
+                    else if(select_dg_gb.equals("군위군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gw_api);
                     }
-                    else if(select_gb.equals("김천시")){
+                    else if(select_dg_gb.equals("김천시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_gc_api);
                     }
-                    else if(select_gb.equals("문경시")){
+                    else if(select_dg_gb.equals("문경시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_mg_api);
                     }
-                    else if(select_gb.equals("봉화군")){
+                    else if(select_dg_gb.equals("봉화군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_bh_api);
                     }
-                    else if(select_gb.equals("상주시")){
+                    else if(select_dg_gb.equals("상주시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_sangj_api);
-                    }else if(select_gb.equals("성주군")){
+                    }else if(select_dg_gb.equals("성주군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_seongj_api);
-                    }else if(select_gb.equals("안동시")){
+                    }else if(select_dg_gb.equals("안동시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_ad_api);
-                    }else if(select_gb.equals("영덕군")){
+                    }else if(select_dg_gb.equals("영덕군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_yd_api);
-                    }else if(select_gb.equals("영양군")){
+                    }else if(select_dg_gb.equals("영양군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_yy_api);
-                    }else if(select_gb.equals("영주시")){
+                    }else if(select_dg_gb.equals("영주시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_yj_api);
-                    }else if(select_gb.equals("영천시")){
+                    }else if(select_dg_gb.equals("영천시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_yeongc_api);
-                    }else if(select_gb.equals("예천군")){
+                    }else if(select_dg_gb.equals("예천군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_yec_api);
-                    }else if(select_gb.equals("울릉군")){
+                    }else if(select_dg_gb.equals("울릉군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_uldo_api);
-                    }else if(select_gb.equals("울진군")){
+                    }else if(select_dg_gb.equals("울진군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_ulgin_api);
-                    }else if(select_gb.equals("의성군")){
+                    }else if(select_dg_gb.equals("의성군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_us_api);
-                    }else if(select_gb.equals("청도군")){
+                    }else if(select_dg_gb.equals("청도군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_cd_api);
-                    }else if(select_gb.equals("청송군")){
+                    }else if(select_dg_gb.equals("청송군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_cs_api);
-                    }else if(select_gb.equals("칠곡군")){
+                    }else if(select_dg_gb.equals("칠곡군")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_cg_api);
                     }
-                    else if(select_gb.equals("포항시")){
+                    else if(select_dg_gb.equals("포항시")){
                         DownloadWebpageTask2 task=new DownloadWebpageTask2();
                         task.execute(dis_ph_api);
                     }
-                    select_dg=" ";
-                    select_gb=" ";
                 }
 
                 else if(!ce_he_check.isChecked()){
@@ -501,8 +496,9 @@ public class AcceptableFragment extends Fragment {
             }
         }
         protected void onPostExecute(String result){
-            boolean indutyName=false, inhvec=false, inhvgc=false, initem=false;
+            boolean indutyName=false, inhvec=false, inhvgc=false, initem=false, intotalCount=false;;
             String dutyName=null; String hvec=null; String hvgc=null;
+            Integer totalCount=0;
             super.onPostExecute(result);
             txt_er.setText(" ");
             txt_ward.setText(" ");
@@ -528,6 +524,9 @@ public class AcceptableFragment extends Fragment {
                             if(xpp.getName().equals("hvgc")){
                                 inhvgc=true;
                             }
+                            if(xpp.getName().equals("totalCount")){
+                                intotalCount=true;
+                            }
                             break;
                         case XmlPullParser.TEXT:
                             if(indutyName){
@@ -542,6 +541,10 @@ public class AcceptableFragment extends Fragment {
                                 hvgc=xpp.getText();
                                 inhvgc=false;
                             }
+                            if(intotalCount){
+                                totalCount=Integer.parseInt(xpp.getText());
+                                intotalCount=false;
+                            }
                             break;
                         case XmlPullParser.END_TAG:
                             if(xpp.getName().equals("item") && er_check.isChecked()){
@@ -551,6 +554,11 @@ public class AcceptableFragment extends Fragment {
                             if(xpp.getName().equals("item") && ward_check.isChecked()){
                                 txt_ward.append(dutyName+"\n"+"[입원실]"+hvgc+"\n\n");
                                 initem=false;
+                            }
+                            if(xpp.getName().equals("totalCount")){
+                                if(totalCount==0){
+                                    txt_er.setText("없음");
+                                }
                             }
                             break;
                     }
