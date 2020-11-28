@@ -57,8 +57,10 @@ public class AmbulanceFragment extends Fragment {
         readExcel();
         return root;
     }
+
     public void readExcel() {
         Workbook workbook = null;
+        String contents = null;
         try {
             InputStream is = getActivity().getResources().getAssets().open("dg_ambulance.xls");
             Workbook wb = Workbook.getWorkbook(is);
@@ -74,11 +76,12 @@ public class AmbulanceFragment extends Fragment {
                     for(int row=rowIndexStart;row<rowTotal;row++) {
                         sb = new StringBuilder();
                         for(int col=0;col<colTotal;col++) {
-                            String contents = sheet.getCell(col, row).getContents();
+                            contents = sheet.getCell(col, row).getContents();
                             sb.append("col"+col+" : "+contents+" , ");
-                            arrayAdapter.add(contents);
+
                         }
                         Log.i("test", sb.toString());
+                        arrayAdapter.add(contents);
                     }
                 }
             }
