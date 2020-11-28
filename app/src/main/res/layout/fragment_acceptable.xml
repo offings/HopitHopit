@@ -26,7 +26,9 @@
                 android:id="@+id/search_region"
                 android:layout_width="wrap_content"
                 android:layout_height="46dp"
-                android:text="지역 조건" />
+                android:text="지역 조건"
+                android:textStyle="bold"
+                android:textColor="#5F8A54"/>
 
             <Spinner
                 android:id="@+id/spinner1"
@@ -44,6 +46,8 @@
             android:id="@+id/bed_inq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#5F8A54"
+            android:textStyle="bold"
             android:text="실시간 병상 조회" />
 
         <LinearLayout
@@ -52,13 +56,15 @@
 
             <CheckBox
                 android:id="@+id/er"
-                android:layout_width="wrap_content"
+                android:layout_width="154dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="응급실"/>
+                android:text="응급실" />
 
             <CheckBox
                 android:id="@+id/ward"
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="입원실" />
 
@@ -75,7 +81,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <TableRow
                 android:id="@+id/tableRow1"
                 android:layout_width="match_parent"
@@ -84,17 +89,21 @@
                     android:id="@+id/txt_er"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/txt_ward"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:layout_weight="1" />
             </TableRow>
         </TableLayout>
 
 
         <TextView
+            android:textColor="#5F8A54"
+            android:textStyle="bold"
             android:id="@+id/em_dis_inf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -190,6 +199,7 @@
 
             <TextView
                 android:id="@+id/hop_name"
+                android:textColor="#000000"
                 android:background="#FFFFFF"
                 android:layout_marginBottom="1dp"
                 android:layout_width="match_parent"
@@ -201,6 +211,7 @@
                 android:background="#474646">
                 <TextView
                     android:id="@+id/txt_ce_he"
+                    android:textColor="#000000"
                     android:background="#FFFFFF"
                     android:padding="5dp"
                     android:layout_marginLeft="1dp"
@@ -210,6 +221,7 @@
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/txt_ce_in"
+                    android:textColor="#000000"
                     android:background="#FFFFFF"
                     android:padding="5dp"
                     android:layout_marginLeft="1dp"
@@ -219,6 +231,7 @@
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/txt_mi"
+                    android:textColor="#000000"
                     android:background="#FFFFFF"
                     android:padding="5dp"
                     android:layout_marginLeft="1dp"
@@ -228,6 +241,7 @@
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/txt_ab_in"
+                    android:textColor="#000000"
                     android:background="#FFFFFF"
                     android:padding="5dp"
                     android:layout_marginLeft="1dp"
@@ -245,6 +259,7 @@
                 <TextView
                     android:id="@+id/txt_massive_bu"
                     android:background="#FFFFFF"
+                    android:textColor="#000000"
                     android:padding="5dp"
                     android:layout_marginLeft="1dp"
                     android:layout_marginRight="1dp"
@@ -256,6 +271,7 @@
                     android:id="@+id/txt_connect_li"
                     android:background="#FFFFFF"
                     android:padding="5dp"
+                    android:textColor="#000000"
                     android:layout_marginRight="1dp"
                     android:layout_marginBottom="1dp"
                     android:layout_width="match_parent"
@@ -264,6 +280,7 @@
                 <TextView
                     android:id="@+id/txt_em_en"
                     android:background="#FFFFFF"
+                    android:textColor="#000000"
                     android:padding="5dp"
                     android:layout_marginRight="1dp"
                     android:layout_marginBottom="1dp"
@@ -272,6 +289,7 @@
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/txt_em_di"
+                    android:textColor="#000000"
                     android:background="#FFFFFF"
                     android:padding="5dp"
                     android:layout_marginRight="1dp"
@@ -287,6 +305,7 @@
                 android:background="#474646">
                 <TextView
                     android:id="@+id/txt_pre_mom"
+                    android:textColor="#000000"
                     android:background="#FFFFFF"
                     android:padding="5dp"
                     android:layout_marginLeft="1dp"
@@ -297,6 +316,7 @@
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/txt_mental_pat"
+                    android:textColor="#000000"
                     android:background="#FFFFFF"
                     android:padding="5dp"
                     android:layout_marginRight="1dp"
@@ -306,6 +326,7 @@
                     android:layout_weight="1" />
                 <TextView
                     android:id="@+id/txt_baby"
+                    android:textColor="#000000"
                     android:background="#FFFFFF"
                     android:padding="5dp"
                     android:layout_marginRight="1dp"

@@ -42,7 +42,7 @@ public class AcceptableFragment extends Fragment {
     TextView txt_er, txt_ward;
     TextView txt_ce_he, txt_ce_in, txt_mi, txt_ab_in, txt_massive_bu, txt_connect_li;
     TextView txt_em_en, txt_em_di, txt_pre_mom, txt_mental_pat, txt_baby;
-    TextView hop_name;
+    TextView hop_name, txt_er1, txt_ward1;
     CheckBox er_check, ward_check;
     CheckBox ce_he_check, ce_in_check, mi_check, ab_in_check, massive_bu_check, connect_li_check, em_en_check, em_di_check, pre_mom_check, mental_pat_check, baby_check;
     Button room_button, dis_button;
@@ -116,6 +116,7 @@ public class AcceptableFragment extends Fragment {
     String dis_cs_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%B2%AD%EC%86%A1%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
     String dis_cg_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%EC%B9%A0%EA%B3%A1%EA%B5%B0&SM_TYPE=1&pageNo=1&numOfRows=10";
     String dis_ph_api="http://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&STAGE1=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&STAGE2=%ED%8F%AC%ED%95%AD%EC%8B%9C&SM_TYPE=1&pageNo=1&numOfRows=10";
+    String txt;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         acceptableViewModel =
@@ -306,10 +307,10 @@ public class AcceptableFragment extends Fragment {
                         task.execute(room_ph_api);
                     }
                 }
-                else if(!er_check.isChecked()){
+                if(!er_check.isChecked()){
                     txt_er.setText(" ");
                 }
-                else if(!ward_check.isChecked()){
+                if(!ward_check.isChecked()){
                     txt_ward.setText(" ");
                 }
             }
@@ -446,38 +447,48 @@ public class AcceptableFragment extends Fragment {
                     }
                 }
 
-                else if(!ce_he_check.isChecked()){
+                if(!ce_he_check.isChecked()){
                     txt_ce_he.setText(" ");
+                    hop_name.setText(" ");
                 }
-                else if(!ce_in_check.isChecked()){
+                if(!ce_in_check.isChecked()){
                     txt_ce_in.setText(" ");
                 }
-                else if(!mi_check.isChecked()){
+                if(!mi_check.isChecked()){
                     txt_mi.setText(" ");
+                    hop_name.setText(" ");
                 }
-                else if(!ab_in_check.isChecked()){
+                if(!ab_in_check.isChecked()){
                     txt_ab_in.setText(" ");
+                    hop_name.setText(" ");
                 }
-                else if(!massive_bu_check.isChecked()){
+                if(!massive_bu_check.isChecked()){
                     txt_massive_bu.setText(" ");
+                    hop_name.setText(" ");
                 }
-                else if(!connect_li_check.isChecked()){
+                if(!connect_li_check.isChecked()){
                     txt_connect_li.setText(" ");
+                    hop_name.setText(" ");
                 }
-                else if(!em_en_check.isChecked()){
+                if(!em_en_check.isChecked()){
                     txt_em_en.setText(" ");
+                    hop_name.setText(" ");
                 }
-                else if(!em_di_check.isChecked()){
+                if(!em_di_check.isChecked()){
                     txt_em_di.setText(" ");
+                    hop_name.setText(" ");
                 }
-                else if(!pre_mom_check.isChecked()){
+                if(!pre_mom_check.isChecked()){
                     txt_pre_mom.setText(" ");
+                    hop_name.setText(" ");
                 }
-                else if(!mental_pat_check.isChecked()){
+                if(!mental_pat_check.isChecked()){
                     txt_mental_pat.setText(" ");
+                    hop_name.setText(" ");
                 }
-                else if(!baby_check.isChecked()){
+                if(!baby_check.isChecked()){
                     txt_baby.setText(" ");
+                    hop_name.setText(" ");
                 }
             }
         });
@@ -488,7 +499,7 @@ public class AcceptableFragment extends Fragment {
     private class DownloadWebpageTask extends AsyncTask<String, Void, String>{
         protected String doInBackground(String... urls){
             try{
-                String txt=(String)downloadUrl((String)urls[0]);
+                txt=(String)downloadUrl((String)urls[0]);
                 return txt;
             }
             catch (IOException e){
@@ -500,8 +511,7 @@ public class AcceptableFragment extends Fragment {
             String dutyName=null; String hvec=null; String hvgc=null;
             Integer totalCount=0;
             super.onPostExecute(result);
-            txt_er.setText(" ");
-            txt_ward.setText(" ");
+            txt_er.setText(" "); txt_ward.setText(" ");
             try {// XML Pull Parser 객체생성
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -595,7 +605,7 @@ public class AcceptableFragment extends Fragment {
     private class DownloadWebpageTask2 extends AsyncTask<String, Void, String>{
         protected String doInBackground(String... urls){
             try{
-                String txt=(String)downloadUrl((String)urls[0]);
+                txt=(String)downloadUrl((String)urls[0]);
                 return txt;
             }
             catch (IOException e){
@@ -603,7 +613,7 @@ public class AcceptableFragment extends Fragment {
             }
         }
         protected void onPostExecute(String result){
-            boolean indutyName=false, inMKioskTy1=false, initem=false;
+            boolean indutyName=false, inMKioskTy1=false;
             String dutyName=null; String MKioskTy1=null;
             boolean inMKioskTy2=false, inMKioskTy3=false, inMKioskTy4=false,
                     inMKioskTy5=false, inMKioskTy6=false, inMKioskTy7=false,
@@ -703,63 +713,52 @@ public class AcceptableFragment extends Fragment {
 
                         case XmlPullParser.END_TAG:
                             if(xpp.getName().equals("item") && ce_he_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_ce_he.append("[뇌출혈] "+MKioskTy1);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && ce_in_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_ce_in.append("[뇌경색] "+MKioskTy2);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && mi_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_mi.append("[심근경색] "+MKioskTy3);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && ab_in_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_ab_in.append("[복부손상] "+MKioskTy4);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && massive_bu_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_massive_bu.append("[중증화상] "+MKioskTy5);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && connect_li_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_connect_li.append("[사지접합] "+MKioskTy6);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && em_en_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_em_en.append("[응급내시경] "+MKioskTy7);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && em_di_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_em_di.append("[응급투석] "+MKioskTy8);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && pre_mom_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_pre_mom.append("[조산산모] "+MKioskTy9);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && mental_pat_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_mental_pat.append("[정신질환자] "+MKioskTy10);
-                                initem=false;
                             }
                             if(xpp.getName().equals("item") && baby_check.isChecked()){
-                                hop_name.setText(dutyName);
+                                hop_name.setText("\n"+dutyName);
                                 txt_baby.append("[신생아] "+MKioskTy11);
-                                initem=false;
                             }
                             if(xpp.getName().equals("totalCount")){
                                 if(totalCount==0){
-                                    hop_name.setText("없음");
+                                    hop_name.setText("\n없음");
                                 }
                             }
                             break;
