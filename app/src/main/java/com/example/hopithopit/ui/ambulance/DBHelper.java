@@ -37,7 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
         stringBuffer.append(ambulance_num + " TEXT, ");
         stringBuffer.append(ambulance_tel + " TEXT, ");
         stringBuffer.append(ambulance_city + " TEXT, ");
-        stringBuffer.append(ambulance_district + " TEXT ");
+        stringBuffer.append(ambulance_district + " TEXT);");
 
         Log.d(TAG, stringBuffer.toString());
         db.execSQL(stringBuffer.toString());
