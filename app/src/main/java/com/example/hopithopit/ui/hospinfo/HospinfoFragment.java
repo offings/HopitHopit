@@ -27,6 +27,7 @@ import java.time.Instant;
 public class HospinfoFragment extends Fragment {
 
     private HospinfoViewModel hospinfoViewModel;
+    public static String hospinfo = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -82,13 +83,11 @@ public class HospinfoFragment extends Fragment {
             hospImageView.setImageResource(hospimg[i]);
             hospTextView.setText(hosptext[i]);
 
-            final String hospinfo = hosptext[i];
-
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Toast.makeText(context, hospinfo, Toast.LENGTH_SHORT).show();
-                    ((MainActivity)getActivity()).replaceFragment(R.id.action_navigation_hospinfo_to_hospinfoListFragment);
+                    ((MainActivity)getActivity()).replaceFragment(R.id.hospinfoListFragment);
+                    hospinfo = hosptext[i];
                 }
             });
 
