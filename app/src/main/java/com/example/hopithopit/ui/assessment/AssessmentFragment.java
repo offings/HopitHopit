@@ -1,6 +1,7 @@
 package com.example.hopithopit.ui.assessment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +76,7 @@ public class AssessmentFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(context, assinfo + " 클릭", Toast.LENGTH_SHORT).show();
+                    ((MainActivity)getActivity()).replaceFragment(R.id.assessmentListFragment);
                 }
             });
 
