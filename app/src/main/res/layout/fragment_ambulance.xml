@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,7 +21,9 @@
                 android:id="@+id/search_region"
                 android:layout_width="wrap_content"
                 android:layout_height="46dp"
-                android:text="지역 조건" />
+                android:text="지역 조건"
+                android:textStyle="bold"
+                android:textColor="#5F8A54" />
 
             <Spinner
                 android:id="@+id/spinner1"
@@ -51,7 +53,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="구급차 유형" />
+                android:text="구급차 유형"
+                android:textStyle="bold"
+                android:textColor="#5F8A54" />
 
             <TextView
                 android:id="@+id/ambulance_number"
@@ -59,7 +63,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="차량 번호" />
+                android:text="차량 번호"
+                android:textStyle="bold"
+                android:textColor="#5F8A54" />
 
             <TextView
                 android:id="@+id/ambulance_tel"
@@ -67,17 +73,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="전화번호"/>
+                android:text="전화번호"
+                android:textStyle="bold"
+                android:textColor="#5F8A54"/>
 
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/ambulance_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
+    <ListView
+        android:id="@+id/ambulance_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
-</ScrollView>
+</LinearLayout>

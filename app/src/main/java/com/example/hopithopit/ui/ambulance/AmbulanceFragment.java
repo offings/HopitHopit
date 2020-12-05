@@ -68,7 +68,7 @@ public class AmbulanceFragment extends Fragment {
                 Log.wtf("AmbulanceFragment", "Error" + line, e);
                 e.printStackTrace();
         }
-        //adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, ambulList);
+        ambulList.remove(0);
         final AmbulAdapter adapter = new AmbulAdapter((MainActivity)getActivity(), ambulList, listView);
         listView.setAdapter(adapter);
     }
