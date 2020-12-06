@@ -29,7 +29,6 @@ import java.util.List;
 public class AssessmentListFragment extends Fragment {
     ListView listView;
     private List<AssementSample> AssessmentSamples = new ArrayList<>();
-
     private AssessmentViewModel assessmentViewModel;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +36,7 @@ public class AssessmentListFragment extends Fragment {
 
         listView = root.findViewById(R.id.disease_list);
         readAssessmentData();
+        readAssessmentData_cancer();
         return root;
     }
 
@@ -47,19 +47,52 @@ public class AssessmentListFragment extends Fragment {
         );
 
         String line = "";
+
         try{
             reader.readLine();
             while((line = reader.readLine()) != null){
                 String[] tokens = line.split(",");
 
-                AssementSample sample = new AssementSample();
-                sample.setName(tokens[0]);
-                sample.setDisease(tokens[1]);
-                sample.setLevel(tokens[2]);
-                sample.setLocation(tokens[3]);
-                AssessmentSamples.add(sample);
+                if(AssessmentFragment.disease_info.equals(tokens[1])) {
+                    AssementSample sample = new AssementSample();
+                    sample.setName(tokens[0]);
+                    sample.setDisease(tokens[1]);
+                    sample.setLevel(tokens[2]);
+                    sample.setLocation(tokens[3]);
+                    AssessmentSamples.add(sample);
+                    Log.d("My Activity", "Just created " + sample);
+                }
+            }
+        } catch(IOException e){
+            e.printStackTrace();
+        }
 
-                Log.d("My Activity", "Just created " + sample);
+        final AssessmentAdapter adapter = new AssessmentAdapter((MainActivity)getActivity(), AssessmentSamples, listView);
+        listView.setAdapter(adapter);
+    }
+
+    private void readAssessmentData_cancer() {
+        InputStream is = getResources().openRawResource(R.raw.cancer_test);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("x-windows-949"))
+        );
+
+        String line = "";
+
+        try{
+            reader.readLine();
+            while((line = reader.readLine()) != null){
+                String[] tokens = line.split(",");
+
+                if(AssessmentFragment.disease_info.equals(tokens[1])) {
+                    AssementSample sample = new AssementSample();
+                    sample.setName(tokens[0]);
+                    sample.setDisease(tokens[1]);
+                    sample.setLevel(tokens[2]);
+                    sample.setLocation(tokens[3]);
+                    AssessmentSamples.add(sample);
+                    Log.d("My Activity", "Just created " + sample);
+                }
             }
         } catch(IOException e){
             e.printStackTrace();

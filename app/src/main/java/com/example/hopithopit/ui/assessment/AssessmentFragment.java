@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class AssessmentFragment extends Fragment {
 
     private AssessmentViewModel assessmentViewModel;
+    public static String disease_info = "";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_assessment, container, false);
@@ -43,7 +44,7 @@ public class AssessmentFragment extends Fragment {
     class ListViewAdapter extends BaseAdapter {
 
         Context context = null;
-        String[] diseaseText = {"폐렴", "관상동맥우회술", "급성기뇌졸중", "급성심근경색증", "간암", "폐암", "대장암", "위암", "유방암"};
+        String[] diseaseText = {"폐렴", "관상동맥우회술", "급성기뇌졸중", "급성심근경색증", "폐암", "대장암", "위암", "유방암"};
 
         @Override
         public int getCount() {
@@ -71,12 +72,12 @@ public class AssessmentFragment extends Fragment {
             TextView TextView = view.findViewById(R.id.disease_name);
             TextView.setText(diseaseText[i]);
 
-            final String assinfo = diseaseText[i];
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, assinfo + " 클릭", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, diseaseText[i] + " 클릭", Toast.LENGTH_SHORT).show();
                     ((MainActivity)getActivity()).replaceFragment(R.id.assessmentListFragment);
+                    disease_info = diseaseText[i];
                 }
             });
 
