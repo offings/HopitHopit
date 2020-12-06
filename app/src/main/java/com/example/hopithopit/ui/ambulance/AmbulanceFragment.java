@@ -35,7 +35,8 @@ public class AmbulanceFragment extends Fragment {
 
     private List<Ambul> ambulList = new ArrayList<>();
     ListView listView;
-
+    AmbulAdapter adapter = null;
+    ArrayList<Ambul> result = new ArrayList<>();
     private Spinner spinner1;
     private Spinner spinner2;
     //선택된 대구 경북 시구군
@@ -96,15 +97,17 @@ public class AmbulanceFragment extends Fragment {
 
             }
         });
-
+        readData();
         Button button = (Button)root.findViewById(R.id.ambulance_search);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readData();
+                result.clear();
+                printData();
             }
         });
         listView = (ListView)root.findViewById(R.id.ambulance_list);
+
         return root;
     }
 
@@ -136,57 +139,63 @@ public class AmbulanceFragment extends Fragment {
             Log.wtf("AmbulanceFragment", "Error" + line, e);
             e.printStackTrace();
         }
+    }
+
+    private void printData() {
+
         //String[] array = ambulList.toArray(new String[ambulList.size()]);
 
-        ArrayList<Ambul> result = new ArrayList<>();
         //result.addAll(ambulList);
-        for(int i = 0; i<ambulList.size()/2; i++){
+        for(int i = 0; i<ambulList.size(); i++){
             // result.removeAll(result);
             if(select_dg_gb.equals("달서구") && ambulList.get(i).getDistrict().contains("달서구")){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + result);
+                //Log.d("result", "result : " + result);
             }
             else if(select_dg_gb.equals("남구") && (ambulList.get(i).getCity().contains("대구") && ambulList.get(i).getDistrict().contains("남구"))){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + result);
+                //Log.d("result", "result : " + result);
             }
             else if(select_dg_gb.equals("중구") && ambulList.get(i).getCity().contains("대구") && ambulList.get(i).getDistrict().contains("중구")){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + result);
+                //Log.d("result", "result : " + result);
             }
             else if(select_dg_gb.equals("경산시") && ambulList.get(i).getDistrict().contains("경산시")){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + result);
+                //Log.d("result", "result : " + result);
             }
             else if(select_dg_gb.equals("경주시") && ambulList.get(i).getDistrict().contains("경주시")){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + i + result);
+                //Log.d("result", "result : " + i + result);
             }
             else if(select_dg_gb.equals("구미시") && ambulList.get(i).getDistrict().contains("구미시")){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + result);
+                //Log.d("result", "result : " + result);
             }
             else if(select_dg_gb.equals("문경시") && ambulList.get(i).getDistrict().contains("문경시")){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + result);
+                //Log.d("result", "result : " + result);
             }
             else if(select_dg_gb.equals("안동시") && ambulList.get(i).getDistrict().contains("안동시")){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + result);
+                //Log.d("result", "result : " + result);
             }
             else if(select_dg_gb.equals("영덕군") && ambulList.get(i).getDistrict().contains("영덕군")){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + result);
+                //Log.d("result", "result : " + result);
             }
             else if(select_dg_gb.equals("포항시") && ambulList.get(i).getDistrict().contains("포항시 남구")){
                 result.add(ambulList.get(i));
-                Log.d("result", "result : " + result);
+                //Log.d("result", "result : " + result);
             }
+            else if(select_dg_gb.equals("군위군")){
+                result.clear();
+                //Log.d("result", "result : " + result);
+            }
+            adapter = new AmbulAdapter((MainActivity)getActivity(), result, listView);
+            listView.setAdapter(adapter);
         }
-        final AmbulAdapter adapter = new AmbulAdapter((MainActivity)getActivity(), result, listView);
-        listView.setAdapter(adapter);
 
-        //result.clear();
         //ambulList.remove(0);
         //result.removeall(result);
     }
