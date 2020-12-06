@@ -448,46 +448,46 @@ public class AcceptableFragment extends Fragment {
                 }
 
                 if(!ce_he_check.isChecked()){
-                    txt_ce_he.setText(" ");
+                    txt_ce_he.setText("[뇌출혈] ");
                     hop_name.setText(" ");
                 }
                 if(!ce_in_check.isChecked()){
-                    txt_ce_in.setText(" ");
+                    txt_ce_in.setText("[뇌경색] ");
                 }
                 if(!mi_check.isChecked()){
-                    txt_mi.setText(" ");
+                    txt_mi.setText("[심근경색] ");
                     hop_name.setText(" ");
                 }
                 if(!ab_in_check.isChecked()){
-                    txt_ab_in.setText(" ");
+                    txt_ab_in.setText("[복부손상] ");
                     hop_name.setText(" ");
                 }
                 if(!massive_bu_check.isChecked()){
-                    txt_massive_bu.setText(" ");
+                    txt_massive_bu.setText("[중증화상] ");
                     hop_name.setText(" ");
                 }
                 if(!connect_li_check.isChecked()){
-                    txt_connect_li.setText(" ");
+                    txt_connect_li.setText("[사지접합] ");
                     hop_name.setText(" ");
                 }
                 if(!em_en_check.isChecked()){
-                    txt_em_en.setText(" ");
+                    txt_em_en.setText("[응급내시경] ");
                     hop_name.setText(" ");
                 }
                 if(!em_di_check.isChecked()){
-                    txt_em_di.setText(" ");
+                    txt_em_di.setText("[응급투석] ");
                     hop_name.setText(" ");
                 }
                 if(!pre_mom_check.isChecked()){
-                    txt_pre_mom.setText(" ");
+                    txt_pre_mom.setText("[조산 산모] ");
                     hop_name.setText(" ");
                 }
                 if(!mental_pat_check.isChecked()){
-                    txt_mental_pat.setText(" ");
+                    txt_mental_pat.setText("[정신질환자] ");
                     hop_name.setText(" ");
                 }
                 if(!baby_check.isChecked()){
-                    txt_baby.setText(" ");
+                    txt_baby.setText("[신생아] ");
                     hop_name.setText(" ");
                 }
             }
@@ -624,9 +624,9 @@ public class AcceptableFragment extends Fragment {
             String MKioskTy8=null; String MKioskTy9=null; String MKioskTy10=null;
             String MKioskTy11=null; Integer totalCount=0;
             super.onPostExecute(result);
-            txt_ce_he.setText(" "); txt_ce_in.setText(" "); txt_mi.setText(" "); txt_ab_in.setText(" ");
-            txt_massive_bu.setText(" "); txt_connect_li.setText(" "); txt_em_en.setText(" "); txt_em_di.setText(" ");
-            txt_pre_mom.setText(" "); txt_mental_pat.setText(" "); txt_baby.setText(" ");
+            txt_ce_he.setText("[뇌출혈] "); txt_ce_in.setText("[뇌경색] "); txt_mi.setText("[심근경색] "); txt_ab_in.setText("[복부손상] ");
+            txt_massive_bu.setText("[중증화상] "); txt_connect_li.setText("[사지접합] "); txt_em_en.setText("[응급내시경] "); txt_em_di.setText("[응급투석] ");
+            txt_pre_mom.setText("[조산 산모] "); txt_mental_pat.setText("[정신질환자] "); txt_baby.setText("[신생아] ");
             try {// XML Pull Parser 객체생성
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -714,47 +714,47 @@ public class AcceptableFragment extends Fragment {
                         case XmlPullParser.END_TAG:
                             if(xpp.getName().equals("item") && ce_he_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_ce_he.append("[뇌출혈] "+MKioskTy1);
+                                txt_ce_he.append(MKioskTy1);
                             }
                             if(xpp.getName().equals("item") && ce_in_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_ce_in.append("[뇌경색] "+MKioskTy2);
+                                txt_ce_in.append(MKioskTy2);
                             }
                             if(xpp.getName().equals("item") && mi_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_mi.append("[심근경색] "+MKioskTy3);
+                                txt_mi.append(MKioskTy3);
                             }
                             if(xpp.getName().equals("item") && ab_in_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_ab_in.append("[복부손상] "+MKioskTy4);
+                                txt_ab_in.append(MKioskTy4);
                             }
                             if(xpp.getName().equals("item") && massive_bu_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_massive_bu.append("[중증화상] "+MKioskTy5);
+                                txt_massive_bu.append(MKioskTy5);
                             }
                             if(xpp.getName().equals("item") && connect_li_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_connect_li.append("[사지접합] "+MKioskTy6);
+                                txt_connect_li.append(MKioskTy6);
                             }
                             if(xpp.getName().equals("item") && em_en_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_em_en.append("[응급내시경] "+MKioskTy7);
+                                txt_em_en.append(MKioskTy7);
                             }
                             if(xpp.getName().equals("item") && em_di_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_em_di.append("[응급투석] "+MKioskTy8);
+                                txt_em_di.append(MKioskTy8);
                             }
                             if(xpp.getName().equals("item") && pre_mom_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_pre_mom.append("[조산산모] "+MKioskTy9);
+                                txt_pre_mom.append(MKioskTy9);
                             }
                             if(xpp.getName().equals("item") && mental_pat_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_mental_pat.append("[정신질환자] "+MKioskTy10);
+                                txt_mental_pat.append(MKioskTy10);
                             }
                             if(xpp.getName().equals("item") && baby_check.isChecked()){
                                 hop_name.setText("\n"+dutyName);
-                                txt_baby.append("[신생아] "+MKioskTy11);
+                                txt_baby.append(MKioskTy11);
                             }
                             if(xpp.getName().equals("totalCount")){
                                 if(totalCount==0){
