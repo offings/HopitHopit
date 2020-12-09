@@ -82,7 +82,7 @@ public class HospinfoListFragment extends Fragment {
     String gb_more_api = "http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire?serviceKey=yNTJ6AknFLjMpn1Bme5Rk6Rr1Piz57T4zyDXLp7MfYFXgsOnojoMBpujFVSTkODNcAk1O3dWCtOiZIW%2F%2BKVFPg%3D%3D&Q0=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&QZ=B&QD=D003&pageNo=1&numOfRows=100";
 
     String[] more_QD = {"D003", "D006", "D007", "D016", "D017", "D018", "D019", "D020", "D021", "D022", "D023", "D024", "D034"};
-/*
+
     static final Integer APP_PERMISSION = 1;
 
     private void askForPermission(String permission, Integer requestCode){
@@ -94,7 +94,7 @@ public class HospinfoListFragment extends Fragment {
                 ActivityCompat.requestPermissions(getActivity(), new String[] {permission }, requestCode);
             }
         } else {
-            Toast.makeText(getContext(), "" + permission + " is already granted", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "" + permission + " is already granted", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -108,19 +108,44 @@ public class HospinfoListFragment extends Fragment {
             Toast.makeText(getContext(), "Permission denied", Toast.LENGTH_SHORT).show();
         }
     }
-*/
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospinfo_list, container, false);
-/*
+
+        // Set the adapter
+        if (view instanceof RecyclerView) {
+            Context context = view.getContext();
+            recyclerView = (RecyclerView) view;
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            hospInfoItems = new ArrayList<HospInfoItem>();
+        }
+
         askForPermission(Manifest.permission.ACCESS_FINE_LOCATION, APP_PERMISSION);
         LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         LocationListener locationListener = new LocationListener(){
+
             @Override
             public void onLocationChanged(@NonNull Location location) {
-                mlocation.set(location);
+                mlocation = location;
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(@NonNull String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(@NonNull String provider) {
+
             }
         };
 
@@ -131,19 +156,10 @@ public class HospinfoListFragment extends Fragment {
             return null;
 
         if (lm.getAllProviders().contains(LocationManager.NETWORK_PROVIDER))
-            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 100, locationListener);
 
         if (lm.getAllProviders().contains(LocationManager.GPS_PROVIDER))
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0, locationListener);
-*/
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-            hospInfoItems = new ArrayList<HospInfoItem>();
-        }
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 100, locationListener);
 
 
         if (HospinfoFragment.hospinfo.equals("종합병원")) {
@@ -218,6 +234,7 @@ public class HospinfoListFragment extends Fragment {
                 String txt = (String)downloadUrl((String)urls[0]);
                 return txt;
             } catch (IOException e) {
+                Toast.makeText(getContext(), "다운로드 실패", Toast.LENGTH_SHORT);
                 return "다운로드 실패";
             }
         }
@@ -250,9 +267,11 @@ public class HospinfoListFragment extends Fragment {
 
             String[] dutyDay = {"월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일", "공휴일"};
             boolean indutyAddr = false; boolean indutyName = false; boolean indutyTel1 = false; boolean indutyTel3 = false;
+            boolean inwgs84Lon = false; boolean inwgs84Lat = false;
             boolean[] indutyTimec = new boolean[8];
             boolean[] indutyTimes = new boolean[8];
             String dutyAddr = ""; String dutyName = ""; String dutyTel1 = ""; String dutyTel3 = "";
+            double wgs84Lon = 0.0d; double wgs84Lat = 0.0d;
             String[] dutyTimec = new String[8];
             String[] dutyTimes = new String[8];
             for (int i=0; i<8; i++){
@@ -315,6 +334,10 @@ public class HospinfoListFragment extends Fragment {
                             indutyTimes[6] = true;
                         } else if (xpp.getName().equals("dutyTime8s")){
                             indutyTimes[7] = true;
+                        } else if (xpp.getName().equals("wgs84Lon")){
+                            inwgs84Lon = true;
+                        } else if (xpp.getName().equals("wgs84Lat")){
+                            inwgs84Lat = true;
                         }
                     } else if (eventType == XmlPullParser.TEXT) {
                         if (indutyAddr){
@@ -377,48 +400,61 @@ public class HospinfoListFragment extends Fragment {
                         } else if (indutyTimes[7]){
                             dutyTimes[7] = xpp.getText();
                             indutyTimes[7] = false;
+                        } else if (inwgs84Lon){
+                            wgs84Lon = Double.parseDouble(xpp.getText());
+                            inwgs84Lon = false;
+                        } else if (inwgs84Lat){
+                            wgs84Lat = Double.parseDouble(xpp.getText());
+                            inwgs84Lat = false;
                         }
                     } else if (eventType == XmlPullParser.END_TAG) {
                         if (xpp.getName().equals("item")) {
-                            String dutyTime = "";
-                            boolean weekday = true;
-                            for (int i = 0; i < 4; i++) {
-                                if (dutyTimes[i] != dutyTimes[i+1] || dutyTimec[i] != dutyTimec[i+1]){
-                                    weekday = false;
-                                    break;
-                                }
-                            }
-                            if (weekday){
-                                dutyTime = "평일 " + dutyTimes[0].substring(0, 2)+":"+dutyTimes[0].substring(2, 4)
-                                        + " - " + dutyTimec[0].substring(0, 2)+":"+dutyTimec[0].substring(2, 4) + "\n";
-                            } else {
-                                for (int i = 0; i < 5; i++) {
-                                    if (dutyTimes[i].equals("휴무")) {
-                                        dutyTime += dutyDay[i] + " " + dutyTimes[i] + "\n";
-                                    } else {
-                                        dutyTime += dutyDay[i] + " " + dutyTimes[i].substring(0, 2)+":"+dutyTimes[i].substring(2, 4)
-                                                + " - " + dutyTimec[i].substring(0, 2)+":"+dutyTimec[i].substring(2, 4) + "\n";
+                            Location hlocation = new Location("");
+                            hlocation.setLatitude(wgs84Lat);
+                            hlocation.setLongitude(wgs84Lon);
+                            float resultd = mlocation.distanceTo(hlocation);
+
+                            if (resultd < 4000) {
+                                Log.d("distance", ""+resultd);
+                                String dutyTime = "";
+                                boolean weekday = true;
+                                for (int i = 0; i < 4; i++) {
+                                    if (dutyTimes[i] != dutyTimes[i + 1] || dutyTimec[i] != dutyTimec[i + 1]) {
+                                        weekday = false;
+                                        break;
                                     }
                                 }
-                            }
-                            for (int i = 0; i < 5; i++) {
-                                dutyTimes[i] = "휴무";
-                            }
-                            for (int i = 5; i < 8; i++) {
-                                if (dutyTimes[i].equals("휴무")) {
-                                    dutyTime += dutyDay[i] + " " + dutyTimes[i];
+                                if (weekday) {
+                                    dutyTime = "평일 " + dutyTimes[0].substring(0, 2) + ":" + dutyTimes[0].substring(2, 4)
+                                            + " - " + dutyTimec[0].substring(0, 2) + ":" + dutyTimec[0].substring(2, 4) + "\n";
                                 } else {
-                                    dutyTime += dutyDay[i] + " " + dutyTimes[i].substring(0, 2)+":"+dutyTimes[i].substring(2, 4)
-                                            + " - " + dutyTimec[i].substring(0, 2)+":"+dutyTimec[i].substring(2, 4);
+                                    for (int i = 0; i < 5; i++) {
+                                        if (dutyTimes[i].equals("휴무")) {
+                                            dutyTime += dutyDay[i] + " " + dutyTimes[i] + "\n";
+                                        } else {
+                                            dutyTime += dutyDay[i] + " " + dutyTimes[i].substring(0, 2) + ":" + dutyTimes[i].substring(2, 4)
+                                                    + " - " + dutyTimec[i].substring(0, 2) + ":" + dutyTimec[i].substring(2, 4) + "\n";
+                                        }
+                                    }
                                 }
-                                if (i<7){
-                                    dutyTime += "\n";
+                                for (int i = 0; i < 5; i++) {
+                                    dutyTimes[i] = "휴무";
                                 }
-                                dutyTimes[i] = "휴무";
+                                for (int i = 5; i < 8; i++) {
+                                    if (dutyTimes[i].equals("휴무")) {
+                                        dutyTime += dutyDay[i] + " " + dutyTimes[i];
+                                    } else {
+                                        dutyTime += dutyDay[i] + " " + dutyTimes[i].substring(0, 2) + ":" + dutyTimes[i].substring(2, 4)
+                                                + " - " + dutyTimec[i].substring(0, 2) + ":" + dutyTimec[i].substring(2, 4);
+                                    }
+                                    if (i < 7) {
+                                        dutyTime += "\n";
+                                    }
+                                    dutyTimes[i] = "휴무";
+                                }
+
+                                hospInfoItems.add(new HospInfoItem(dutyName, dutyAddr, "[대표전화] " + dutyTel1, "[응급실전화] " + dutyTel3, dutyTime, resultd));
                             }
-
-                            hospInfoItems.add(new HospInfoItem(dutyName, dutyAddr, "[대표전화] "+dutyTel1, "[응급실전화] "+dutyTel3, dutyTime));
-
                         }
                     }
                     eventType = xpp.next();
