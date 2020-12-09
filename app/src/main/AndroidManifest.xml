@@ -19,10 +19,10 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDQdKeNbt1vU2qqc1KwRFiKra8kTlfvaBA"/>
-
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDQdKeNbt1vU2qqc1KwRFiKra8kTlfvaBA"/>
+        <!--
+                <meta-data
+                    android:name="com.google.android.maps.v2.API_KEY"
+                    android:value="AIzaSyDQdKeNbt1vU2qqc1KwRFiKra8kTlfvaBA"/>-->
 
         <activity
             android:name=".MainActivity"
