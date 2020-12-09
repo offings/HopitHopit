@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/hospinfoListFragment"
         android:name="com.example.hopithopit.ui.hospinfo.HospinfoListFragment"
-        android:label="fragment_hospinfo_list"
+        android:label="@string/title_hospinfo"
         tools:layout="@layout/fragment_hospinfo_list" />
 
     <fragment
