@@ -59,7 +59,7 @@
     <fragment
         android:id="@+id/assessmentListFragment"
         android:name="com.example.hopithopit.ui.assessment.AssessmentListFragment"
-        android:label="assessment"
+        android:label="평가정보"
         tools:layout="@layout/fragment_assessment_list" />
 
 
