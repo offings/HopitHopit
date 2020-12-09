@@ -11,10 +11,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/any"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/any"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
         <LinearLayout
@@ -23,9 +23,11 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_marginLeft="10dp"
                 android:id="@+id/search_region"
                 android:layout_width="wrap_content"
                 android:layout_height="46dp"
+                android:textSize="16dp"
                 android:text="지역 조건"
                 android:textStyle="bold"
                 android:textColor="#5F8A54"/>
@@ -33,21 +35,24 @@
             <Spinner
                 android:id="@+id/spinner1"
                 android:layout_width="150dp"
-                android:layout_height="46dp" />
+                android:layout_height="50dp" />
 
             <Spinner
                 android:id="@+id/spinner2"
                 android:layout_width="150dp"
-                android:layout_height="46dp" />
+                android:layout_height="50dp" />
         </LinearLayout>
 
 
         <TextView
+            android:layout_marginTop="10dp"
             android:id="@+id/bed_inq"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
             android:textColor="#5F8A54"
             android:textStyle="bold"
+            android:textSize="16dp"
             android:text="실시간 병상 조회" />
 
         <LinearLayout
@@ -71,11 +76,11 @@
         </LinearLayout>
 
 
-    <Button
-        android:id="@+id/room_button"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:text="조회" />
+        <Button
+            android:id="@+id/room_button"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:text="조회" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -102,11 +107,14 @@
 
 
         <TextView
+            android:layout_marginLeft="5dp"
             android:textColor="#5F8A54"
             android:textStyle="bold"
             android:id="@+id/em_dis_inf"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="30dp"
+            android:textSize="16dp"
             android:text="중증 응급 질환 정보" />
 
         <LinearLayout
@@ -189,11 +197,11 @@
                 android:text="신생아" />
         </LinearLayout>
 
-    <Button
-        android:id="@+id/dis_button"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:text="중증 질환 수용 가능 여부" />
+        <Button
+            android:id="@+id/dis_button"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:text="중증 질환 수용 가능 여부" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -354,5 +362,5 @@
             android:id="@+id/any2"
             android:layout_width="wrap_content"
             android:layout_height="200dp"/>
-   </LinearLayout>
+    </LinearLayout>
 </ScrollView>
