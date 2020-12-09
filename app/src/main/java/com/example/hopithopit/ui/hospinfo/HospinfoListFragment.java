@@ -85,144 +85,54 @@ public class HospinfoListFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
             hospInfoItems = new ArrayList<HospInfoItem>();
-            //hospInfoItems.add(new HospInfoItem("병원이름", "전화번호", "주소", "진료과목", "전문의", "진료시간"));
-
-            //recyclerView.setAdapter(new HospInfoAdapter(hospInfoItems));
         }
 
 
-
         if (HospinfoFragment.hospinfo.equals("종합병원")) {
-            DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-            downloadWebpageTask1.execute(dg_general_api);
-            DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-            downloadWebpageTask2.execute(gb_general_api);
+            downloadWebpageTask_pageNo(dg_general_api, 1);
+            downloadWebpageTask_pageNo(gb_general_api, 1);
         } else if (HospinfoFragment.hospinfo.equals("내과")) {
-            for (int pageNo = 1; pageNo <= 12; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_internal_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 11; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_internal_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_internal_api, 12);
+            downloadWebpageTask_pageNo(gb_internal_api, 11);
         } else if (HospinfoFragment.hospinfo.equals("정형외과")) {
-            for (int pageNo = 1; pageNo <= 6; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_orthopedic_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 5; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_orthopedic_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_orthopedic_api, 6);
+            downloadWebpageTask_pageNo(gb_orthopedic_api, 5);
         } else if (HospinfoFragment.hospinfo.equals("공공의료원")) {
-            for (int pageNo = 1; pageNo <= 3; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_public_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 6; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_public_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_public_api, 3);
+            downloadWebpageTask_pageNo(gb_public_api, 6);
         } else if (HospinfoFragment.hospinfo.equals("치과")){
-            for (int pageNo = 1; pageNo <= 7; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_dentistry_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 5; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_dentistry_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_dentistry_api, 7);
+            downloadWebpageTask_pageNo(gb_dentistry_api, 5);
         } else if (HospinfoFragment.hospinfo.equals("안과")) {
-            for (int pageNo = 1; pageNo <= 3; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_eye_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 3; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_eye_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_eye_api, 3);
+            downloadWebpageTask_pageNo(gb_eye_api, 3);
         } else if (HospinfoFragment.hospinfo.equals("소아과")) {
-            for (int pageNo = 1; pageNo <= 8; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_pediatrics_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 7; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_pediatrics_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_pediatrics_api, 8);
+            downloadWebpageTask_pageNo(gb_pediatrics_api, 7);
         } else if (HospinfoFragment.hospinfo.equals("이비인후과")) {
-            for (int pageNo = 1; pageNo <= 6; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_ear_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 5; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_ear_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_ear_api, 6);
+            downloadWebpageTask_pageNo(gb_ear_api, 5);
         } else if (HospinfoFragment.hospinfo.equals("피부과")) {
-            for (int pageNo = 1; pageNo <= 7; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_dermatology_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 6; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_dermatology_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_dermatology_api, 7);
+            downloadWebpageTask_pageNo(gb_dermatology_api, 6);
         } else if (HospinfoFragment.hospinfo.equals("한의원")) {
-            for (int pageNo = 1; pageNo <= 9; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_oriental_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 7; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_oriental_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_oriental_api, 9);
+            downloadWebpageTask_pageNo(gb_oriental_api, 7);
         } else if (HospinfoFragment.hospinfo.equals("산부인과")) {
-            for (int pageNo = 1; pageNo <= 2; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_obstetrics_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 2; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_obstetrics_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_obstetrics_api, 2);
+            downloadWebpageTask_pageNo(gb_obstetrics_api, 2);
         } else if (HospinfoFragment.hospinfo.equals("비뇨기과")) {
-            for (int pageNo = 1; pageNo <= 4; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_urology_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 4; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_urology_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_urology_api, 4);
+            downloadWebpageTask_pageNo(gb_urology_api, 4);
         } else if (HospinfoFragment.hospinfo.equals("정신의학과")) {
-            for (int pageNo = 1; pageNo <= 2; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_psychiatry_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 2; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_psychiatry_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_psychiatry_api, 2);
+            downloadWebpageTask_pageNo(gb_psychiatry_api, 2);
         } else if (HospinfoFragment.hospinfo.equals("성형외과")) {
-            for (int pageNo = 1; pageNo <= 3; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_plastic_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 1; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_plastic_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_plastic_api, 3);
+            downloadWebpageTask_pageNo(gb_plastic_api, 1);
         } else if (HospinfoFragment.hospinfo.equals("요양병원")) {
-            for (int pageNo = 1; pageNo <= 1; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask1 = new DownloadWebpageTask();
-                downloadWebpageTask1.execute(dg_nursing_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
-            for (int pageNo = 1; pageNo <= 2; pageNo++) {
-                DownloadWebpageTask downloadWebpageTask2 = new DownloadWebpageTask();
-                downloadWebpageTask2.execute(gb_nursing_api.replace("pageNo=1", "pageNo=" + pageNo));
-            }
+            downloadWebpageTask_pageNo(dg_nursing_api, 1);
+            downloadWebpageTask_pageNo(gb_nursing_api, 2);
         } else if (HospinfoFragment.hospinfo.equals("기타")) {
             for (int i=0; i<more_QD.length; i++) {
                 downloadWebpageTask_pageNo(dg_more_api.replace("QD=D003", "QD="+more_QD[i]), 1);
