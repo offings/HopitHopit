@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ambulance.AmbulanceFragment"
-    android:orientation="vertical">
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    tools:context=".ui.ambulance.AmbulanceFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,70 +23,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="46dp"
                 android:text="지역 조건"
-                android:textStyle="bold"
-                android:textColor="#5F8A54" />
+                android:layout_marginLeft="5dp"
+                android:textColor="#5F8A54"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spinner1"
-                android:layout_width="140dp"
+                android:layout_width="120dp"
                 android:layout_height="46dp" />
 
             <Spinner
                 android:id="@+id/spinner2"
                 android:layout_width="140dp"
                 android:layout_height="46dp" />
+
             <Button
                 android:id="@+id/ambulance_search"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="검색"/>
+                android:text="검색" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/ambulance_type"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:text="구급차 유형"
-                android:textStyle="bold"
-                android:textColor="#5F8A54" />
-
-            <TextView
-                android:id="@+id/ambulance_number"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:text="차량 번호"
-                android:textStyle="bold"
-                android:textColor="#5F8A54" />
-
-            <TextView
-                android:id="@+id/ambulance_tel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="전화번호"
-                android:textStyle="bold"
-                android:textColor="#5F8A54"/>
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/ambulance_list"
         android:layout_width="match_parent"
-        android:layout_height="480dp" />
+        android:layout_height="490dp" />
 
 
 </LinearLayout>

@@ -1,15 +1,23 @@
 package com.example.hopithopit.ui.ambulance;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +28,8 @@ import com.example.hopithopit.ui.ambulance.AmbulAdapter;
 import com.example.hopithopit.ui.ambulance.AmbulanceViewModel;
 import com.example.hopithopit.MainActivity;
 import com.example.hopithopit.R;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,6 +58,7 @@ public class AmbulanceFragment extends Fragment {
                 ViewModelProviders.of(this).get(AmbulanceViewModel.class);
         View root = inflater.inflate(R.layout.fragment_ambulance, container, false);
 
+        //select city, district
         spinner1=(Spinner)root.findViewById(R.id.spinner1);
         spinner2=(Spinner)root.findViewById(R.id.spinner2);
 
@@ -97,7 +108,9 @@ public class AmbulanceFragment extends Fragment {
 
             }
         });
+
         readData();
+
         Button button = (Button)root.findViewById(R.id.ambulance_search);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +139,7 @@ public class AmbulanceFragment extends Fragment {
 
                 //read the data
                 Ambul ambul = new Ambul();
-                //ambul.setOwn(tokens[0]);
+                ambul.setOwn(tokens[0]);
                 ambul.setType(tokens[1]);
                 ambul.setNum(tokens[2]);
                 ambul.setTel(tokens[3]);
@@ -142,12 +155,8 @@ public class AmbulanceFragment extends Fragment {
     }
 
     private void printData() {
-
-        //String[] array = ambulList.toArray(new String[ambulList.size()]);
-
-        //result.addAll(ambulList);
+        //print result
         for(int i = 0; i<ambulList.size(); i++){
-            // result.removeAll(result);
             if(select_dg_gb.equals("달서구") && ambulList.get(i).getDistrict().contains("달서구")){
                 result.add(ambulList.get(i));
                 //Log.d("result", "result : " + result);
@@ -191,6 +200,26 @@ public class AmbulanceFragment extends Fragment {
             else if(select_dg_gb.equals("군위군")){
                 result.clear();
                 //Log.d("result", "result : " + result);
+            }
+            else if (select_dg_gb.equals("북구") || select_dg_gb.equals("서구") || select_dg_gb.equals("수성구") || select_dg_gb.equals("동구") || select_dg_gb.equals("달성군")
+                    || select_dg_gb.equals("고령군") || select_dg_gb.equals("군위군") || select_dg_gb.equals("김천시") || select_dg_gb.equals("봉화군") || select_dg_gb.equals("상주시")
+                    || select_dg_gb.equals("상주시") || select_dg_gb.equals("성주군") || select_dg_gb.equals("영양군") || select_dg_gb.equals("영주시") || select_dg_gb.equals("영천시")
+                    || select_dg_gb.equals("예천군") || select_dg_gb.equals("울릉군") || select_dg_gb.equals("울진군") || select_dg_gb.equals("의성군") || select_dg_gb.equals("청도군")
+                    || select_dg_gb.equals("청송군") || select_dg_gb.equals("칠곡군") || select_dg_gb.equals("포항시")){
+                //toast msg, and cancel
+                String str = "해당 지역에는 민간 구급차 정보가 없습니다.";
+                final Toast toast = Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT);
+                ViewGroup group = (ViewGroup)toast.getView();
+                TextView msg = (TextView)group.getChildAt(0);
+                msg.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+                toast.show();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast.cancel();
+                    }
+                }, 8);
             }
             adapter = new AmbulAdapter((MainActivity)getActivity(), result, listView);
             listView.setAdapter(adapter);
