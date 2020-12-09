@@ -13,13 +13,16 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.hopithopit.R;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements OnMapReadyCallback {
 
     private SearchViewModel searchViewModel;
     private MapView mapView = null;
@@ -30,13 +33,12 @@ public class SearchFragment extends Fragment {
                 ViewModelProviders.of(this).get(SearchViewModel.class);
         View root = inflater.inflate(R.layout.fragment_search, container, false);
 
-        mapView = (MapView)root.findViewById(R.id.map);
-       // mapView.getMapAsync(this);
+        mapView = (MapView)root.findViewById(R.id.mapFragment);
+        mapView.getMapAsync(this);
         return root;
     }
 
     public void onMapReady(GoogleMap googleMap) {
-
         LatLng SEOUL = new LatLng(37.56, 126.97);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(SEOUL);
@@ -45,6 +47,5 @@ public class SearchFragment extends Fragment {
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
-
     }
 }
