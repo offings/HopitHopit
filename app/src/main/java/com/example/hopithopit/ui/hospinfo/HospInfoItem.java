@@ -1,14 +1,13 @@
 package com.example.hopithopit.ui.hospinfo;
 
 public class HospInfoItem {
-    private String hospName, hospTel, hospAdr, hospDgid, hospSpecialist, hospTime;
+    private String hospName, hospAdr, hospTel1, hospTel3, hospTime;
 
-    public HospInfoItem(String hospName, String hospTel, String hospAdr, String hospDgid, String hospSpecialist, String hospTime) {
+    public HospInfoItem(String hospName, String hospAdr, String hospTel1, String hospTel3, String hospTime) {
         this.hospName = hospName;
-        this.hospTel = hospTel;
         this.hospAdr = hospAdr;
-        this.hospDgid = hospDgid;
-        this.hospSpecialist = hospSpecialist;
+        this.hospTel1 = hospTel1;
+        this.hospTel3 = hospTel3;
         this.hospTime = hospTime;
     }
 
@@ -20,14 +19,6 @@ public class HospInfoItem {
         this.hospName = hospName;
     }
 
-    public String getHospTel() {
-        return hospTel;
-    }
-
-    public void setHospTel(String hospTel) {
-        this.hospTel = hospTel;
-    }
-
     public String getHospAdr() {
         return hospAdr;
     }
@@ -36,20 +27,20 @@ public class HospInfoItem {
         this.hospAdr = hospAdr;
     }
 
-    public String getHospDgid() {
-        return hospDgid;
+    public String getHospTel1() {
+        return hospTel1;
     }
 
-    public void setHospDgid(String hospDgid) {
-        this.hospDgid = hospDgid;
+    public void setHospTel1(String hospTel1) {
+        this.hospTel1 = hospTel1;
     }
 
-    public String getHospSpecialist() {
-        return hospSpecialist;
+    public String getHospTel3() {
+        return hospTel3;
     }
 
-    public void setHospSpecialist(String hospSpecialist) {
-        this.hospSpecialist = hospSpecialist;
+    public void setHospTel3(String hospTel3) {
+        this.hospTel3 = hospTel3;
     }
 
     public String getHospTime() {

@@ -25,26 +25,18 @@
         android:textColor="@android:color/black"/>
 
     <TextView
-        android:id="@+id/hospTel"
+        android:id="@+id/hospTel1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="병원전화번호"
+        android:text="병원대표전화번호"
         android:textSize="14sp"
         android:textColor="@android:color/black"/>
 
     <TextView
-        android:id="@+id/hospDgid"
+        android:id="@+id/hospTel3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="진료과목"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"/>
-
-    <TextView
-        android:id="@+id/hospSpecialist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="전문의"
+        android:text="병원응급실전화번호"
         android:textSize="14sp"
         android:textColor="@android:color/black"/>
 

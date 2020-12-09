@@ -1,9 +1,17 @@
 package com.example.hopithopit.ui.hospinfo;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hopithopit.MainActivity;
 import com.example.hopithopit.R;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -32,6 +41,7 @@ public class HospinfoListFragment extends Fragment {
 
     RecyclerView recyclerView;
     ArrayList<HospInfoItem> hospInfoItems;
+    Location mlocation = null;
 
     // 종합병원, 내과, 정형외과, 공공의료원, 치과, 안과, 소아과, 이비인후과,
     // 피부과, 한의원, 산부인과, 비뇨기과, 정신의학과, 성형외과, 요양병원, 기타
@@ -72,12 +82,60 @@ public class HospinfoListFragment extends Fragment {
     String gb_more_api = "http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire?serviceKey=yNTJ6AknFLjMpn1Bme5Rk6Rr1Piz57T4zyDXLp7MfYFXgsOnojoMBpujFVSTkODNcAk1O3dWCtOiZIW%2F%2BKVFPg%3D%3D&Q0=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&QZ=B&QD=D003&pageNo=1&numOfRows=100";
 
     String[] more_QD = {"D003", "D006", "D007", "D016", "D017", "D018", "D019", "D020", "D021", "D022", "D023", "D024", "D034"};
+/*
+    static final Integer APP_PERMISSION = 1;
 
+    private void askForPermission(String permission, Integer requestCode){
+        if (ContextCompat.checkSelfPermission(getActivity(), permission)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
+                ActivityCompat.requestPermissions(getActivity(), new String[] {permission }, requestCode);
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), new String[] {permission }, requestCode);
+            }
+        } else {
+            Toast.makeText(getContext(), "" + permission + " is already granted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(ActivityCompat.checkSelfPermission(getActivity(), permissions[0]) == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "Permission granted", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+        }
+    }
+*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospinfo_list, container, false);
+/*
+        askForPermission(Manifest.permission.ACCESS_FINE_LOCATION, APP_PERMISSION);
+        LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
 
+        LocationListener locationListener = new LocationListener(){
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                mlocation.set(location);
+            }
+        };
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)
+            return null;
+
+        if (lm.getAllProviders().contains(LocationManager.NETWORK_PROVIDER))
+            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+
+        if (lm.getAllProviders().contains(LocationManager.GPS_PROVIDER))
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0, locationListener);
+*/
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -176,7 +234,6 @@ public class HospinfoListFragment extends Fragment {
                 String line = null;
                 String page = "";
                 while ((line = bufreader.readLine()) != null) {
-                    Log.d("Hospinfolist", line);
                     page += line;
                 }
 
@@ -192,10 +249,10 @@ public class HospinfoListFragment extends Fragment {
             super.onPostExecute(result);
 
             String[] dutyDay = {"월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일", "공휴일"};
-            boolean indutyAddr = false; boolean indutyName = false; boolean indutyTel1 = false;
+            boolean indutyAddr = false; boolean indutyName = false; boolean indutyTel1 = false; boolean indutyTel3 = false;
             boolean[] indutyTimec = new boolean[8];
             boolean[] indutyTimes = new boolean[8];
-            String dutyAddr = ""; String dutyName = ""; String dutyTel1 = "";
+            String dutyAddr = ""; String dutyName = ""; String dutyTel1 = ""; String dutyTel3 = "";
             String[] dutyTimec = new String[8];
             String[] dutyTimes = new String[8];
             for (int i=0; i<8; i++){
@@ -224,6 +281,8 @@ public class HospinfoListFragment extends Fragment {
                             indutyName = true;
                         } else if (xpp.getName().equals("dutyTel1")){
                             indutyTel1 = true;
+                        } else if (xpp.getName().equals("dutyTel3")){
+                            indutyTel3 = true;
                         } else if (xpp.getName().equals("dutyTime1c")){
                             indutyTimec[0] = true;
                         } else if (xpp.getName().equals("dutyTime2c")){
@@ -267,6 +326,9 @@ public class HospinfoListFragment extends Fragment {
                         } else if (indutyTel1){
                             dutyTel1 = xpp.getText();
                             indutyTel1 = false;
+                        } else if (indutyTel3){
+                            dutyTel3 = xpp.getText();
+                            indutyTel3 = false;
                         } else if (indutyTimec[0]){
                             dutyTimec[0] = xpp.getText();
                             indutyTimec[0] = false;
@@ -327,13 +389,15 @@ public class HospinfoListFragment extends Fragment {
                                 }
                             }
                             if (weekday){
-                                dutyTime = "평일 " + dutyTimes[0] + " - " + dutyTimec[0] + "\n";
+                                dutyTime = "평일 " + dutyTimes[0].substring(0, 2)+":"+dutyTimes[0].substring(2, 4)
+                                        + " - " + dutyTimec[0].substring(0, 2)+":"+dutyTimec[0].substring(2, 4) + "\n";
                             } else {
                                 for (int i = 0; i < 5; i++) {
                                     if (dutyTimes[i].equals("휴무")) {
                                         dutyTime += dutyDay[i] + " " + dutyTimes[i] + "\n";
                                     } else {
-                                        dutyTime += dutyDay[i] + " " + dutyTimes[i] + " - " + dutyTimec[i] + "\n";
+                                        dutyTime += dutyDay[i] + " " + dutyTimes[i].substring(0, 2)+":"+dutyTimes[i].substring(2, 4)
+                                                + " - " + dutyTimec[i].substring(0, 2)+":"+dutyTimec[i].substring(2, 4) + "\n";
                                     }
                                 }
                             }
@@ -344,7 +408,8 @@ public class HospinfoListFragment extends Fragment {
                                 if (dutyTimes[i].equals("휴무")) {
                                     dutyTime += dutyDay[i] + " " + dutyTimes[i];
                                 } else {
-                                    dutyTime += dutyDay[i] + " " + dutyTimes[i] + " - " + dutyTimec[i];
+                                    dutyTime += dutyDay[i] + " " + dutyTimes[i].substring(0, 2)+":"+dutyTimes[i].substring(2, 4)
+                                            + " - " + dutyTimec[i].substring(0, 2)+":"+dutyTimec[i].substring(2, 4);
                                 }
                                 if (i<7){
                                     dutyTime += "\n";
@@ -352,8 +417,7 @@ public class HospinfoListFragment extends Fragment {
                                 dutyTimes[i] = "휴무";
                             }
 
-                            String qd = "";
-                            hospInfoItems.add(new HospInfoItem(dutyName, "[대표전화] "+dutyTel1, dutyAddr, "진료과목", "전문의", dutyTime));
+                            hospInfoItems.add(new HospInfoItem(dutyName, dutyAddr, "[대표전화] "+dutyTel1, "[응급실전화] "+dutyTel3, dutyTime));
 
                         }
                     }

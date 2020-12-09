@@ -36,10 +36,9 @@ public class HospInfoAdapter extends RecyclerView.Adapter<HospInfoAdapter.ViewHo
         HospInfoItem item = mHospInfoItems.get(position);
 
         holder.hospName.setText(item.getHospName());
-        holder.hospTel.setText(item.getHospTel());
         holder.hospAdr.setText(item.getHospAdr());
-        holder.hospDgid.setText(item.getHospDgid());
-        holder.hospSpecialist.setText(item.getHospSpecialist());
+        holder.hospTel1.setText(item.getHospTel1());
+        holder.hospTel3.setText(item.getHospTel3());
         holder.hospTime.setText(item.getHospTime());
     }
 
@@ -49,15 +48,14 @@ public class HospInfoAdapter extends RecyclerView.Adapter<HospInfoAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView hospName, hospTel, hospAdr, hospDgid, hospSpecialist, hospTime;
+        TextView hospName, hospAdr, hospTel1, hospTel3, hospTime;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             hospName = itemView.findViewById(R.id.hospName);
-            hospTel = itemView.findViewById(R.id.hospTel);
             hospAdr = itemView.findViewById(R.id.hospAddress);
-            hospDgid = itemView.findViewById(R.id.hospDgid);
-            hospSpecialist = itemView.findViewById(R.id.hospSpecialist);
+            hospTel1 = itemView.findViewById(R.id.hospTel1);
+            hospTel3 = itemView.findViewById(R.id.hospTel3);
             hospTime = itemView.findViewById(R.id.hospTime);
         }
     }
