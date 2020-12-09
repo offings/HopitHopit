@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.hopithopit.MainActivity;
 import com.example.hopithopit.R;
 import com.example.hopithopit.ui.search.SearchViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -47,6 +49,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -59,6 +63,7 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private FragmentActivity mContext;
     private Marker currentMarker = null;
+    public static String search="";
 
     private Location mCurrentLocatiion;
 
@@ -76,7 +81,7 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             final ViewGroup container, Bundle savedInstanceState) {
         searchViewModel =
                 ViewModelProviders.of(this).get(SearchViewModel.class);
         if (savedInstanceState != null) {
@@ -84,13 +89,42 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
             CameraPosition mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
 
-        View root = inflater.inflate(R.layout.fragment_search, container, false);
+        final View root = inflater.inflate(R.layout.fragment_search, container, false);
         mapView = (MapView) root.findViewById(R.id.mapFragment);
         if (mapView != null) {
             mapView.onCreate(savedInstanceState);
         }
 
         mapView.getMapAsync(this);
+    
+        
+        Context context = null;
+        context=container.getContext();
+        /*try {
+            search_what= URLEncoder.encode(search_info.getText().toString(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        final String finalSearch_what = search_what;
+        */final Context finalContext = context;
+        final Context finalContext1 = context;
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText search_info=(EditText)root.findViewById(R.id.search);
+                String search_what=null;
+                try {
+                    search_what= URLEncoder.encode(search_info.getText().toString(), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+                ((MainActivity)getActivity()).replaceFragment(R.id.searchListFragment);
+                Toast.makeText(finalContext1, search_what, Toast.LENGTH_LONG).show();
+                search=search_what;
+            }
+        });
         return root;
     }
 

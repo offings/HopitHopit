@@ -50,6 +50,13 @@
         tools:layout="@layout/fragment_hospinfo_list" />
 
     <fragment
+        android:id="@+id/searchListFragment"
+        android:name="com.example.hopithopit.ui.search.SearchListFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search_list" />
+
+
+    <fragment
         android:id="@+id/assessmentListFragment"
         android:name="com.example.hopithopit.ui.assessment.AssessmentListFragment"
         android:label="assessment"

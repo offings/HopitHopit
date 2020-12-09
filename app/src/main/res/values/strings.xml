@@ -6,4 +6,5 @@
     <string name="title_assessment">평가정보</string>
     <string name="title_ambulance">민간구급차</string>
     <string name="title_activity_accept1">MainActivity</string>
+    <string name="title_activity_fragement_search_list">MainActivity</string>
 </resources>
