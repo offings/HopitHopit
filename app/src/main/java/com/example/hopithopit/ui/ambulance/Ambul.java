@@ -3,17 +3,12 @@ package com.example.hopithopit.ui.ambulance;
 public class Ambul {
     private String own, type, num, tel, city, district;
 
-    /*public Ambul(String own, String type, String num, String tel, String city, String district){
-        this.own = own;
-        this.type = type;
-        this.num = num;
-        this.tel = tel;
-        this.city = city;
-        this.district = district;
-    }*/
-
     public void setOwn(String own) {
         this.own = own;
+    }
+
+    public String getOwn() {
+        return own;
     }
 
     public void setType(String type) {
@@ -46,10 +41,6 @@ public class Ambul {
 
     public String getNum() {
         return num;
-    }
-
-    public String getOwn() {
-        return own;
     }
 
     public String getDistrict() {

@@ -47,6 +47,7 @@ public class AmbulanceFragment extends Fragment {
     ListView listView;
     AmbulAdapter adapter = null;
     ArrayList<Ambul> result = new ArrayList<>();
+
     private Spinner spinner1;
     private Spinner spinner2;
     //선택된 대구 경북 시구군
@@ -111,6 +112,7 @@ public class AmbulanceFragment extends Fragment {
 
         readData();
 
+        listView = (ListView)root.findViewById(R.id.ambulance_list);
         Button button = (Button)root.findViewById(R.id.ambulance_search);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +121,6 @@ public class AmbulanceFragment extends Fragment {
                 printData();
             }
         });
-        listView = (ListView)root.findViewById(R.id.ambulance_list);
 
         return root;
     }
@@ -197,10 +198,6 @@ public class AmbulanceFragment extends Fragment {
                 result.add(ambulList.get(i));
                 //Log.d("result", "result : " + result);
             }
-            else if(select_dg_gb.equals("군위군")){
-                result.clear();
-                //Log.d("result", "result : " + result);
-            }
             else if (select_dg_gb.equals("북구") || select_dg_gb.equals("서구") || select_dg_gb.equals("수성구") || select_dg_gb.equals("동구") || select_dg_gb.equals("달성군")
                     || select_dg_gb.equals("고령군") || select_dg_gb.equals("군위군") || select_dg_gb.equals("김천시") || select_dg_gb.equals("봉화군") || select_dg_gb.equals("상주시")
                     || select_dg_gb.equals("상주시") || select_dg_gb.equals("성주군") || select_dg_gb.equals("영양군") || select_dg_gb.equals("영주시") || select_dg_gb.equals("영천시")
@@ -225,8 +222,6 @@ public class AmbulanceFragment extends Fragment {
             listView.setAdapter(adapter);
         }
 
-        //ambulList.remove(0);
-        //result.removeall(result);
     }
 
 }

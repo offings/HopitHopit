@@ -22,10 +22,10 @@ import java.util.List;
 
 public class AmbulAdapter extends ArrayAdapter<Ambul> {
 
-
     private Context context;
     private List mList;
     private ListView mListView;
+
     class UserViewHolder {
         public TextView own;
         public TextView type;
@@ -77,6 +77,7 @@ public class AmbulAdapter extends ArrayAdapter<Ambul> {
                 v.getContext().startActivity(intent);
             }
         });
+
         viewHolder.own.setText(ambul.getOwn());
         viewHolder.type.setText(ambul.getType());
         viewHolder.num.setText(ambul.getNum());
