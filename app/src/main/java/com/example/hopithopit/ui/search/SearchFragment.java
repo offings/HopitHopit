@@ -9,7 +9,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +46,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class SearchFragment extends Fragment implements OnMapReadyCallback {
 
@@ -56,10 +56,13 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
     private FragmentActivity mContext;
     private Marker currentMarker = null;
     public static String search="";
+    ArrayList<HospItem> hData = new ArrayList<HospItem>();;
 
     public static Location mlocation = null;
 
-    String cur_search_api = "http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncLcinfoInqire?serviceKey=yNTJ6AknFLjMpn1Bme5Rk6Rr1Piz57T4zyDXLp7MfYFXgsOnojoMBpujFVSTkODNcAk1O3dWCtOiZIW%2F%2BKVFPg%3D%3D&WGS84_LON=127.085156592737&WGS84_LAT=37.4881325624879&pageNo=1&numOfRows=100";
+    //String cur_search_api = "http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncLcinfoInqire?serviceKey=yNTJ6AknFLjMpn1Bme5Rk6Rr1Piz57T4zyDXLp7MfYFXgsOnojoMBpujFVSTkODNcAk1O3dWCtOiZIW%2F%2BKVFPg%3D%3D&WGS84_LON=127.085156592737&WGS84_LAT=37.4881325624879&pageNo=1&numOfRows=100";
+    String dg_search_api = "http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire?serviceKey=yNTJ6AknFLjMpn1Bme5Rk6Rr1Piz57T4zyDXLp7MfYFXgsOnojoMBpujFVSTkODNcAk1O3dWCtOiZIW%2F%2BKVFPg%3D%3D&Q0=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&pageNo=1&numOfRows=100";
+    String gb_search_api = "http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire?serviceKey=yNTJ6AknFLjMpn1Bme5Rk6Rr1Piz57T4zyDXLp7MfYFXgsOnojoMBpujFVSTkODNcAk1O3dWCtOiZIW%2F%2BKVFPg%3D%3D&Q0=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&pageNo=1&numOfRows=100";
 
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
@@ -111,6 +114,9 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
 
         final View root = inflater.inflate(R.layout.fragment_search, container, false);
 
+        downloadWebpageTask_pageNo(dg_search_api, 39);
+        downloadWebpageTask_pageNo(gb_search_api, 34);
+
         askForPermission(Manifest.permission.ACCESS_FINE_LOCATION, APP_PERMISSION);
         LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
 
@@ -119,8 +125,8 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onLocationChanged(@NonNull Location location) {
                 mlocation = location;
-                DownloadWebpageTask downloadWebpageTask = new DownloadWebpageTask();
-                downloadWebpageTask.execute(cur_search_api.replace("WGS84_LON=127.085156592737", "WGS84_LON="+mlocation.getLongitude()).replace("WGS84_LAT=37.4881325624879", "WGS84_LAT="+mlocation.getLatitude()));
+                //DownloadWebpageTask downloadWebpageTask = new DownloadWebpageTask();
+                //downloadWebpageTask.execute(cur_search_api.replace("WGS84_LON=127.085156592737", "WGS84_LON="+mlocation.getLongitude()).replace("WGS84_LAT=37.4881325624879", "WGS84_LAT="+mlocation.getLatitude()));
 
             }
 
@@ -187,6 +193,12 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
         return root;
     }
 
+    private void downloadWebpageTask_pageNo(String api, int pageNoSize){
+        for (int pageNo = 1; pageNo <= pageNoSize; pageNo++) {
+            DownloadWebpageTask downloadWebpageTask = new DownloadWebpageTask();
+            downloadWebpageTask.execute(api.replace("pageNo=1", "pageNo=" + pageNo));
+        }
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -198,10 +210,10 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
         markerOptions.title("현재위치");
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(curPos));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
 
-        DownloadWebpageTask downloadWebpageTask = new DownloadWebpageTask();
-        downloadWebpageTask.execute(cur_search_api.replace("WGS84_LON=127.085156592737", "WGS84_LON="+curPos.longitude).replace("WGS84_LAT=37.4881325624879", "WGS84_LAT="+curPos.latitude));
+        //DownloadWebpageTask downloadWebpageTask = new DownloadWebpageTask();
+        //downloadWebpageTask.execute(cur_search_api.replace("WGS84_LON=127.085156592737", "WGS84_LON="+curPos.longitude).replace("WGS84_LAT=37.4881325624879", "WGS84_LAT="+curPos.latitude));
 
     }
 
@@ -251,7 +263,6 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
         protected String doInBackground(String... urls) {
             try {
                 String txt = (String) downloadUrl((String) urls[0]);
-                Log.d("doinbackground", urls[0]);
                 return txt;
             } catch (IOException e) {
                 return "다운로드 실패";
@@ -284,9 +295,11 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
             super.onPostExecute(result);
 
             boolean indutyAddr = false; boolean indutyName = false; boolean indutyTel1 = false;
-            boolean indistance = false; boolean inlongitude = false; boolean inlatitude = false;
+            //boolean indistance = false; boolean inlongitude = false; boolean inlatitude = false;
+            boolean inwgs84Lon = false; boolean inwgs84Lat = false;
             String dutyAddr = ""; String dutyName = ""; String dutyTel1 = "";
-            double distance = 0.0d; double longitude = 0.0d; double latitude = 0.0d;
+            //double distance = 0.0d; double longitude = 0.0d; double latitude = 0.0d;
+            double wgs84Lon = 0.0d; double wgs84Lat = 0.0d;
 
             try {
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -307,12 +320,16 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
                             indutyName = true;
                         } else if (xpp.getName().equals("dutyTel1")){
                             indutyTel1 = true;
-                        } else if (xpp.getName().equals("distance")){
+                        } /*else if (xpp.getName().equals("distance")){
                             indistance = true;
                         } else if (xpp.getName().equals("longitude")){
                             inlongitude = true;
                         } else if (xpp.getName().equals("latitude")){
                             inlatitude = true;
+                        }*/else if (xpp.getName().equals("wgs84Lon")){
+                            inwgs84Lon = true;
+                        } else if (xpp.getName().equals("wgs84Lat")){
+                            inwgs84Lat = true;
                         }
                     } else if (eventType == XmlPullParser.TEXT) {
                         if (indutyAddr){
@@ -324,7 +341,7 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
                         } else if (indutyTel1){
                             dutyTel1 = xpp.getText();
                             indutyTel1 = false;
-                        } else if (indistance){
+                        } /*else if (indistance){
                             distance = Double.parseDouble(xpp.getText());
                             indistance = false;
                         } else if (inlongitude){
@@ -333,26 +350,34 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
                         } else if (inlatitude){
                             latitude = Double.parseDouble(xpp.getText());
                             inlatitude = false;
+                        }*/ else if (inwgs84Lon){
+                            wgs84Lon = Double.parseDouble(xpp.getText());
+                            inwgs84Lon = false;
+                        } else if (inwgs84Lat){
+                            wgs84Lat = Double.parseDouble(xpp.getText());
+                            inwgs84Lat = false;
                         }
                     } else if (eventType == XmlPullParser.END_TAG) {
                         if (xpp.getName().equals("item")) {
-                            LatLng hlatlng = new LatLng(latitude, longitude);
+                            //LatLng hlatlng = new LatLng(latitude, longitude);
+                            LatLng hlatlng = new LatLng(wgs84Lat, wgs84Lon);
                             MarkerOptions markerOptions = new MarkerOptions();
                             markerOptions.position(hlatlng);
                             markerOptions.title(dutyName);
                             markerOptions.snippet(dutyAddr);
                             mMap.addMarker(markerOptions);
+                            hData.add(new HospItem(dutyName, dutyAddr, dutyTel1, wgs84Lat, wgs84Lon));
                         }
                     }
                     eventType = xpp.next();
                 }
-                LatLng curPos = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
+                /*LatLng curPos = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(curPos);
                 markerOptions.title("현재위치");
                 mMap.addMarker(markerOptions);
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(curPos));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(13));*/
             } catch (Exception e) {
 
             }
