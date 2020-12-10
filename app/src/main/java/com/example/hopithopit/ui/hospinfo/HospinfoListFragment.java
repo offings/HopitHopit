@@ -415,7 +415,6 @@ public class HospinfoListFragment extends Fragment {
                             float resultd = mlocation.distanceTo(hlocation);
 
                             if (resultd < 4000) {
-                                Log.d("distance", ""+resultd);
                                 String dutyTime = "";
                                 boolean weekday = true;
                                 for (int i = 0; i < 4; i++) {
