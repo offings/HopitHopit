@@ -105,13 +105,15 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
             CameraPosition mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
 
-        View root = inflater.inflate(R.layout.fragment_search, container, false);
+        final View root = inflater.inflate(R.layout.fragment_search, container, false);
 
         EditText input_search = (EditText)root.findViewById(R.id.search);
         qn = input_search.getText().toString();
 
         ImageView btn_search = (ImageView)root.findViewById(R.id.btn_search);
-        btn_search.setOnClickListener(new View.OnClickListener() {
+
+        //button안눌러도 뜨기
+       /* btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -122,7 +124,7 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
-
+*/
         mapView = (MapView) root.findViewById(R.id.mapFragment);
         if (mapView != null) {
             mapView.onCreate(savedInstanceState);
@@ -133,15 +135,9 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
 
         Context context = null;
         context=container.getContext();
-        /*try {
-            search_what= URLEncoder.encode(search_info.getText().toString(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        final String finalSearch_what = search_what;
-        */final Context finalContext = context;
+        final Context finalContext = context;
         final Context finalContext1 = context;
-        /*root.setOnClickListener(new View.OnClickListener() {
+        root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -154,10 +150,10 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
                 }
 
                 ((MainActivity)getActivity()).replaceFragment(R.id.searchListFragment);
-                Toast.makeText(finalContext1, search_what, Toast.LENGTH_LONG).show();
+                //Toast.makeText(finalContext1, search_what, Toast.LENGTH_LONG).show();
                 search=search_what;
             }
-        });*/
+        });
         return root;
     }
 
@@ -183,6 +179,14 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+
+        try {
+            search_api(dg_search_api, qn);
+            search_api(gb_search_api, qn);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
