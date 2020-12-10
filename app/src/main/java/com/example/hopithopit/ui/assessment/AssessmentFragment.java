@@ -75,7 +75,6 @@ public class AssessmentFragment extends Fragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, diseaseText[i] + " 클릭", Toast.LENGTH_SHORT).show();
                     ((MainActivity)getActivity()).replaceFragment(R.id.assessmentListFragment);
                     disease_info = diseaseText[i];
                 }
