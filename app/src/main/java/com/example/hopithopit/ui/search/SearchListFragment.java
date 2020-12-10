@@ -1,11 +1,7 @@
 package com.example.hopithopit.ui.search;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,22 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hopithopit.R;
-import com.example.hopithopit.ui.hospinfo.HospInfoAdapter;
-import com.example.hopithopit.ui.hospinfo.HospInfoItem;
-import com.example.hopithopit.ui.hospinfo.HospinfoFragment;
-import com.example.hopithopit.ui.hospinfo.HospinfoListFragment;
-import com.example.hopithopit.ui.search.SearchAdapter;
-import com.example.hopithopit.ui.search.SearchItem;
-import com.example.hopithopit.ui.search.SearchFragment;
-import com.example.hopithopit.ui.search.SearchFragment;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -51,31 +36,6 @@ public class SearchListFragment extends Fragment {
 
     String dg_api="http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&Q0=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C&QN=%EB%8F%99%EC%82%B0&pageNo=1&numOfRows=10";
     String gb_api="http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire?serviceKey=%2BlL1h1z6TorEtxdAYIedcpcsRa4Y66RE3JzmNnSfOuEoAdgj0%2BH5Lk%2BnhRT9itOfsAGmCnV%2FBhEzvqgHcW5zaA%3D%3D&Q0=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84&QN=%EB%8F%99%EC%82%B0&pageNo=1&numOfRows=10";
-    static final Integer APP_PERMISSION = 1;
-
-    private void askForPermission(String permission, Integer requestCode){
-        if (ContextCompat.checkSelfPermission(getActivity(), permission)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
-                ActivityCompat.requestPermissions(getActivity(), new String[] {permission }, requestCode);
-            } else {
-                ActivityCompat.requestPermissions(getActivity(), new String[] {permission }, requestCode);
-            }
-        } else {
-            //Toast.makeText(getContext(), "" + permission + " is already granted", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if(ActivityCompat.checkSelfPermission(getActivity(), permissions[0]) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "Permission granted", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "Permission denied", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,44 +51,7 @@ public class SearchListFragment extends Fragment {
             SearchItems = new ArrayList<SearchItem>();
         }
 
-        askForPermission(Manifest.permission.ACCESS_FINE_LOCATION, APP_PERMISSION);
-        LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        LocationListener locationListener = new LocationListener(){
-
-            @Override
-            public void onLocationChanged(@NonNull Location location) {
-                mlocation = location;
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(@NonNull String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(@NonNull String provider) {
-
-            }
-        };
-
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED)
-            return null;
-
-        if (lm.getAllProviders().contains(LocationManager.NETWORK_PROVIDER))
-            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 100, locationListener);
-
-        if (lm.getAllProviders().contains(LocationManager.GPS_PROVIDER))
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 100, locationListener);
-
+        mlocation = SearchFragment.mlocation;
 
 
         downloadWebpageTask_pageNo(dg_api.replace("QN=%EB%8F%99%EC%82%B0", "QN="+SearchFragment.search), 1);
